@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1016819868583",
+    "project_id": "medicine-donation-app-2756f",
+    "storage_bucket": "medicine-donation-app-2756f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1016819868583:android:b194d099ea0cf146364c82",
+        "android_client_info": {
+          "package_name": "com.example.medicine_donation_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1016819868583-al75c1oor1hjlb38c1qd06ilrud0m9rp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDq6lzFOG2VIYThnStN-06UPm2uwE9RhXg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1016819868583-al75c1oor1hjlb38c1qd06ilrud0m9rp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
