@@ -38,6 +38,7 @@ dependencies:
   firebase_auth: ^3.11.2
   flutter_expanded_tile: ^0.3.6
   fluttertoast: ^8.0.9
+  flutter_spinkit: ^5.1.0
 
 dev_dependencies:
   flutter_test:
