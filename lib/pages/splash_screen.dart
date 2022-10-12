@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:medicine_donation_app/main.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -14,9 +15,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    Timer(Duration(seconds: 5), () {
-      // Navigator.pushReplacement(
-      //     context, MaterialPageRoute(builder: (context) => Routes()));
+    Timer(const Duration(seconds: 5), () {
+       Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => Routes()));
     });
   }
 

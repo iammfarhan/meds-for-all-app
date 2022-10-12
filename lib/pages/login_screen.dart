@@ -72,18 +72,15 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontSize: 14,
                           ),
                           decoration: const InputDecoration(
-                            focusColor: Color(0xffA7E92F),
-                            hoverColor: Color(0xffA7E92F),
                               enabledBorder: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(12)),
-                                  borderSide:
-                                      BorderSide(color: Color(0xffA7E92F), width: 2)),
+                                  borderSide: BorderSide(
+                                      color: Color(0xffA7E92F), width: 2)),
                               contentPadding:
                                   EdgeInsets.fromLTRB(15, 15, 15, 15),
                               labelText: 'Email',
-                              prefixIcon: Icon(Icons.mail,
-                              color: Color(0xffA7E92F),),
+                              prefixIcon: Icon(Icons.mail),
                               border: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(12)),
@@ -121,15 +118,12 @@ class _LoginScreenState extends State<LoginScreen> {
                               enabledBorder: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(12)),
-                                  borderSide:
-                                      BorderSide(color: Color(0xffA7E92F), width: 2)),
+                                  borderSide: BorderSide(
+                                      color: Color(0xffA7E92F), width: 2)),
                               contentPadding:
                                   EdgeInsets.fromLTRB(15, 15, 15, 15),
                               labelText: 'Password',
-                              prefixIcon: Icon(
-                                Icons.lock,
-                                color: Color(0xffA7E92F),
-                              ),
+                              prefixIcon: Icon(Icons.lock),
                               border: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(12)),
@@ -168,9 +162,9 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: 50,
                           child: ElevatedButton(
                               onPressed: () {
-                                // if (_formKey.currentState.validate()) {
-                                //   signin();
-                                // }
+                                if (_formKey.currentState!.validate()) {
+                                  signin();
+                                }
                               },
                               child: Text(
                                 "Login",
@@ -187,9 +181,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                           borderRadius:
                                               BorderRadius.circular(12.0),
                                           side: const BorderSide(
-                                              color: 
-                                   Color(0xffA7E92F),
-                                              ))))),
+                                            color: Color(0xffA7E92F),
+                                          ))))),
                         )
                       ],
                     ),
@@ -201,9 +194,12 @@ class _LoginScreenState extends State<LoginScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      const Text("Not a Member yet?", style: TextStyle(
-                        color: Color(0xffA7E92F),
-                      ),),
+                      const Text(
+                        "Not a Member yet?",
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
                       const SizedBox(width: 10),
                       GestureDetector(
                         child: const Text('SignUp here',
@@ -237,78 +233,78 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // Future signin() async {
-  //   try {
-  //     await FirebaseAuth.instance
-  //         .signInWithEmailAndPassword(
-  //             email: emailTextController.text,
-  //             password: passwordTextController.text)
-  //         .then((value) => Navigator.pushReplacementNamed(context, '/home'));
-  //   } on FirebaseAuthException catch (e) {
-  //     if (e.message ==
-  //         'There is no user record corresponding to this identifier. The user may have been deleted.') {
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         const SnackBar(
-  //           backgroundColor: Colors.blue,
-  //           behavior: SnackBarBehavior.floating,
-  //           elevation: 1,
-  //           margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
-  //           content: Text(
-  //             "No record found.",
-  //             style: TextStyle(fontSize: 14, color: Colors.white),
-  //             textAlign: TextAlign.center,
-  //           ),
-  //           duration: Duration(seconds: 5),
-  //         ),
-  //       );
-  //     } else if (e.message == 'The email address is badly formatted.') {
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         const SnackBar(
-  //           backgroundColor: Colors.blue,
-  //           behavior: SnackBarBehavior.floating,
-  //           elevation: 1,
-  //           margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
-  //           content: Text(
-  //             "Invalid E-mail Format.",
-  //             style: TextStyle(fontSize: 14, color: Colors.white),
-  //             textAlign: TextAlign.center,
-  //           ),
-  //           duration: Duration(seconds: 5),
-  //         ),
-  //       );
-  //     } else if (e.message == 'Given String is empty or null.') {
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         const SnackBar(
-  //           backgroundColor: Colors.blue,
-  //           behavior: SnackBarBehavior.floating,
-  //           elevation: 1,
-  //           margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
-  //           content: Text(
-  //             "Invalid e-mail Format.",
-  //             style: TextStyle(fontSize: 14, color: Colors.white),
-  //             textAlign: TextAlign.center,
-  //           ),
-  //           duration: Duration(seconds: 5),
-  //         ),
-  //       );
-  //     } else if (e.message ==
-  //         'The password is invalid or the user does not have a password.') {
-  //       ScaffoldMessenger.of(context).showSnackBar(
-  //         const SnackBar(
-  //           backgroundColor: Colors.blue,
-  //           behavior: SnackBarBehavior.floating,
-  //           elevation: 1,
-  //           margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
-  //           content: Text(
-  //             "Invalid password.",
-  //             style: TextStyle(fontSize: 14, color: Colors.white),
-  //             textAlign: TextAlign.center,
-  //           ),
-  //           duration: Duration(seconds: 5),
-  //         ),
-  //       );
-  //     }
-  //     print(e.toString());
-  //   }
-  // }
+  Future signin() async {
+    try {
+      await FirebaseAuth.instance
+          .signInWithEmailAndPassword(
+              email: emailTextController.text,
+              password: passwordTextController.text)
+          .then((value) => Navigator.pushReplacementNamed(context, '/home'));
+    } on FirebaseAuthException catch (e) {
+      if (e.message ==
+          'There is no user record corresponding to this identifier. The user may have been deleted.') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+            elevation: 1,
+            margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
+            content: Text(
+              "No record found.",
+              style: TextStyle(fontSize: 14, color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+            duration: Duration(seconds: 5),
+          ),
+        );
+      } else if (e.message == 'The email address is badly formatted.') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+            elevation: 1,
+            margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
+            content: Text(
+              "Invalid E-mail Format.",
+              style: TextStyle(fontSize: 14, color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+            duration: Duration(seconds: 5),
+          ),
+        );
+      } else if (e.message == 'Given String is empty or null.') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+            elevation: 1,
+            margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
+            content: Text(
+              "Invalid e-mail Format.",
+              style: TextStyle(fontSize: 14, color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+            duration: Duration(seconds: 5),
+          ),
+        );
+      } else if (e.message ==
+          'The password is invalid or the user does not have a password.') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+            elevation: 1,
+            margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
+            content: Text(
+              "Invalid password.",
+              style: TextStyle(fontSize: 14, color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+            duration: Duration(seconds: 5),
+          ),
+        );
+      }
+      print(e.toString());
+    }
+  }
 }

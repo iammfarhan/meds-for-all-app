@@ -189,20 +189,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             height: 50,
                             child: ElevatedButton(
                               onPressed: () {
-                                // if (_formKey.currentState.validate()) {
-                                //   FirebaseAuth.instance
-                                //       .createUserWithEmailAndPassword(
-                                //           email: emailTextController.text,
-                                //           password: passwordTextController.text)
-                                //       .then((value) {
-                                //     print("Created New Account");
-                                //     FocusScope.of(context).unfocus();
-                                //     Navigator.pushReplacementNamed(
-                                //         context, '/home');
-                                //   }).onError((error, stackTrace) {
-                                //     print("Error \\\${error.toString()}");
-                                //   });
-                                // }
+                                if (_formKey.currentState!.validate()) {
+                                  FirebaseAuth.instance
+                                      .createUserWithEmailAndPassword(
+                                          email: emailTextController.text,
+                                          password: passwordTextController.text)
+                                      .then((value) {
+                                    print("Created New Account");
+                                    FocusScope.of(context).unfocus();
+                                    Navigator.pushReplacementNamed(
+                                        context, '/home');
+                                  }).onError((error, stackTrace) {
+                                    print("Error \\\${error.toString()}");
+                                  });
+                                }
                               },
                               child: Text(
                                 "Register",
