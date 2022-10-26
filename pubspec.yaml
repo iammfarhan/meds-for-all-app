@@ -40,6 +40,10 @@ dependencies:
   fluttertoast: ^8.0.9
   flutter_spinkit: ^5.1.0
   flutter_dotenv: ^5.0.2
+  firebase_storage: ^10.3.11
+  image_picker: ^0.8.6
+  uuid: ^3.0.6
+  flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
   flutter_test:

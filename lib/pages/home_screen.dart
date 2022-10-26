@@ -1,7 +1,9 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:medicine_donation_app/pages/view_meds_details.dart';
+import 'package:medicine_donation_app/pages/view_details.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,6 +15,20 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final Stream<QuerySnapshot> medsStream =
       FirebaseFirestore.instance.collection('meds').snapshots();
+
+  void onChangeNavigation(int index) {
+    if (index == 1) {
+      Navigator.pushReplacementNamed(context, '/addService');
+    } else if (index == 2) {
+      Navigator.pushReplacementNamed(context, '/size');
+    } else if (index == 3) {
+      Navigator.pushReplacementNamed(context, '/details');
+    } else if (index == 4) {
+      FirebaseAuth.instance.signOut();
+      Navigator.pushReplacementNamed(context, '/login');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
@@ -23,16 +39,11 @@ class _HomeScreenState extends State<HomeScreen> {
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
-            child: const CircularProgressIndicator(),
+            child: CircularProgressIndicator(),
           );
         }
 
-        final List storedocs = [];
-        snapshot.data?.docs.map((DocumentSnapshot document) {
-          Map a = document.data() as Map<String, dynamic>;
-          storedocs.add(a);
-          a['id'] = document.id;
-        }).toList();
+        
 
         return Scaffold(
           backgroundColor: const Color(0xFFF9F9F9),
@@ -86,9 +97,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(height: 20),
                     Expanded(
                       child: ListView.builder(
-                        itemCount: storedocs.length,
+                        itemCount: snapshot.data!.docs.length,
                         itemBuilder: (context, index) {
-                          final Index = storedocs[index];
+                          final DocumentSnapshot documentSnap =
+                              snapshot.data!.docs[index];
                           return (Card(
                             clipBehavior: Clip.antiAliasWithSaveLayer,
                             color: const Color(0xFFF5F5F5),
@@ -102,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Container(
                                   color: Colors.blue.shade100,
                                   child: Image.network(
-                                    storedocs[index]['cover_image'].toString(),
+                                    documentSnap['cover_image'].toString(),
                                     width: double.infinity,
                                     height: 120,
                                     fit: BoxFit.cover,
@@ -126,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             padding: const EdgeInsetsDirectional
                                                 .fromSTEB(0, 4, 0, 0),
                                             child: Text(
-                                              storedocs[index]['med_name']
+                                              documentSnap['med_name']
                                                   .toString(),
                                               style: const TextStyle(
                                                 fontFamily: 'Poppins',
@@ -149,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   const AlignmentDirectional(
                                                       0.1, -0.05),
                                               child: Text(
-                                                'Quantity: ${storedocs[index]['quant'].toString()}',
+                                                'Quantity: ${documentSnap['quant'].toString()}',
                                                 textAlign: TextAlign.start,
                                                 style: const TextStyle(
                                                   fontFamily: 'Poppins',
@@ -167,7 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       10, 10, 10, 10),
                                   child: Text(
-                                    storedocs[index]['description'].toString(),
+                                    documentSnap['description'].toString(),
                                     maxLines: 2,
                                     textAlign: TextAlign.left,
                                     style: const TextStyle(fontSize: 13),
@@ -184,16 +196,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                     children: [
                                       ElevatedButton(
                                           onPressed: () {
-                                            FirebaseAuth.instance.signOut();
-                                            //   FocusScope.of(context)
-                                            //       .unfocus();
-                                            //   Navigator.push(
-                                            //       context,
-                                            //       MaterialPageRoute(
-                                            //           builder: (BuildContext
-                                            //                   context) =>
-                                            //               ViewMedDetails(
-                                            //                   /*indexxxx*/)));
+                                            FocusScope.of(context).unfocus();
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (BuildContext
+                                                            context) =>
+                                                        ViewProfileDetails(
+                                                            documentSnapshot:
+                                                                documentSnap)));
                                           },
                                           child: Text("View Details",
                                               style: TextStyle(
@@ -224,6 +235,34 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: 0,
+            onTap: onChangeNavigation,
+            type: BottomNavigationBarType.fixed,
+            items: const [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person_add),
+                label: 'Store Profile',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.boy_rounded),
+                label: 'Sizes',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.description_outlined),
+                label: 'Details',
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.logout),
+                label: 'Logout',
+              ),
+            ],
+            selectedItemColor: Colors.blue,
           ),
         );
       },
