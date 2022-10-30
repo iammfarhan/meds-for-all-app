@@ -41,17 +41,20 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: const Color(0xFFF9F9F9),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsetsDirectional.all(20),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(
+                height: 30,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   Image(
-                      image: AssetImage('assets/images/AppLogo.png'),
-                      width: 220,
-                      height: 220),
+                      image: AssetImage('assets/images/AppLogo1.png'),
+                      width: 150,
+                      height: 150),
                 ],
               ),
               const Text('Welcome!',
@@ -72,20 +75,26 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontSize: 14,
                           ),
                           decoration: const InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(12)),
-                                  borderSide: BorderSide(
-                                      color: Color(0xffA7E92F), width: 2)),
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(15, 15, 15, 15),
-                              labelText: 'Email',
-                              prefixIcon: Icon(Icons.mail),
-                              border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(12)),
-                                  borderSide: BorderSide(
-                                      color: Color(0xffA7E92F), width: 2))),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12)),
+                              borderSide: BorderSide(
+                                color: Color(0xff8C52FF),
+                                width: 2,
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
+                            labelText: 'Email',
+                            prefixIcon: Icon(Icons.mail),
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12)),
+                              borderSide: BorderSide(
+                                color: Color(0xff8C52FF),
+                                width: 2,
+                              ),
+                            ),
+                          ),
                           // onSaved: (newValue) => email = newValue,
                           onChanged: (value) {
                             if (value.isNotEmpty &&
@@ -115,20 +124,26 @@ class _LoginScreenState extends State<LoginScreen> {
                           enableSuggestions: !true,
                           autocorrect: !true,
                           decoration: const InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(12)),
-                                  borderSide: BorderSide(
-                                      color: Color(0xffA7E92F), width: 2)),
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(15, 15, 15, 15),
-                              labelText: 'Password',
-                              prefixIcon: Icon(Icons.lock),
-                              border: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(12)),
-                                  borderSide: BorderSide(
-                                      color: Color(0xffA7E92F), width: 2))),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12)),
+                              borderSide: BorderSide(
+                                color: Color(0xff8C52FF),
+                                width: 2,
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
+                            labelText: 'Password',
+                            prefixIcon: Icon(Icons.lock),
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12)),
+                              borderSide: BorderSide(
+                                color: Color(0xff8C52FF),
+                                width: 2,
+                              ),
+                            ),
+                          ),
 
                           // onSaved: (newValue) => password = newValue,
                           onChanged: (value) {
@@ -169,19 +184,21 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: Text(
                                 "Login",
                                 style: TextStyle(
-                                    color: Colors.black, fontSize: 16),
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
                               ),
                               style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all<Color>(
-                                    const Color(0xffA7E92F),
+                                    Color(0xff8C52FF),
                                   ),
                                   shape: MaterialStateProperty.all(
                                       RoundedRectangleBorder(
                                           borderRadius:
                                               BorderRadius.circular(12.0),
                                           side: const BorderSide(
-                                            color: Color(0xffA7E92F),
+                                            color: Color(0xff8C52FF),
                                           ))))),
                         )
                       ],
@@ -202,10 +219,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       const SizedBox(width: 10),
                       GestureDetector(
-                        child: const Text('SignUp here',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                color: Colors.blue)),
+                        child: const Text(
+                          'SignUp here',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xff8C52FF),
+                          ),
+                        ),
                         onTap: () {
                           Navigator.pushReplacementNamed(context, '/signup');
                         },
@@ -214,10 +234,13 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(height: 10),
                     Center(
                       child: GestureDetector(
-                        child: const Text('Forgot Password?',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                color: Colors.blue)),
+                        child: const Text(
+                          'Forgot Password?',
+                          style: TextStyle(
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xff8C52FF),
+                          ),
+                        ),
                         onTap: () {
                           Navigator.pushReplacementNamed(context, '/reset');
                         },

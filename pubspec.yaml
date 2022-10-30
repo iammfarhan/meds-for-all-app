@@ -44,6 +44,9 @@ dependencies:
   image_picker: ^0.8.6
   uuid: ^3.0.6
   flutter_rating_bar: ^4.0.1
+  google_nav_bar: ^5.0.6
+  line_icons: ^2.0.1
+  flutter_sfsymbols: ^2.0.0
 
 dev_dependencies:
   flutter_test:

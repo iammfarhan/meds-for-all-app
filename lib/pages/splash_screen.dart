@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     Timer(const Duration(seconds: 5), () {
-       Navigator.pushReplacement(
+      Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => Routes()));
     });
   }
@@ -24,45 +24,24 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF1B1B1C),
+      backgroundColor: Color(0xff8C52FF),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/images/AppLogo.png',
-              height: 240,
-              width: 240,
-            ),
-            const Padding(
-              padding: EdgeInsets.all(10.0),
-              child: Text(
-                "Medicine Donation App",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 5),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/images/AppLogo.png',
+                height: 280,
+                width: 280,
               ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            const Text(
-              "Donate it!",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const SpinKitFadingCircle(
-              color: Colors.white,
-              size: 50.0,
-            ),
-          ],
+              const SpinKitFadingCircle(
+                color: Colors.white,
+                size: 50.0,
+              ),
+            ],
+          ),
         ),
       ),
     );

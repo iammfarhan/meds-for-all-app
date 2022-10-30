@@ -1,9 +1,11 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:medicine_donation_app/pages/view_details.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:line_icons/line_icons.dart';
+
+import '../widgets/nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -20,9 +22,9 @@ class _HomeScreenState extends State<HomeScreen> {
     if (index == 1) {
       Navigator.pushReplacementNamed(context, '/addService');
     } else if (index == 2) {
-      Navigator.pushReplacementNamed(context, '/size');
+      Navigator.pushReplacementNamed(context, '/stats');
     } else if (index == 3) {
-      Navigator.pushReplacementNamed(context, '/details');
+      Navigator.pushReplacementNamed(context, '/more');
     } else if (index == 4) {
       FirebaseAuth.instance.signOut();
       Navigator.pushReplacementNamed(context, '/login');
@@ -42,8 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
             child: CircularProgressIndicator(),
           );
         }
-
-        
 
         return Scaffold(
           backgroundColor: const Color(0xFFF9F9F9),
@@ -94,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         )
                       ],
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Expanded(
                       child: ListView.builder(
                         itemCount: snapshot.data!.docs.length,
@@ -195,33 +195,36 @@ class _HomeScreenState extends State<HomeScreen> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       ElevatedButton(
-                                          onPressed: () {
-                                            FocusScope.of(context).unfocus();
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (BuildContext
-                                                            context) =>
-                                                        ViewProfileDetails(
-                                                            documentSnapshot:
-                                                                documentSnap)));
-                                          },
-                                          child: Text("View Details",
-                                              style: TextStyle(
-                                                  fontSize: 12,
-                                                  color: Colors.black)),
-                                          style: ButtonStyle(
-                                              backgroundColor:
-                                                  MaterialStateProperty.all<
-                                                      Color>(Color(0xffA7E92F)),
-                                              shape: MaterialStateProperty.all(
-                                                  RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              18.0),
-                                                      side: const BorderSide(
-                                                          color: Color(
-                                                              0xffA7E92F))))))
+                                        onPressed: () {
+                                          FocusScope.of(context).unfocus();
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (BuildContext
+                                                          context) =>
+                                                      ViewProfileDetails(
+                                                          documentSnapshot:
+                                                              documentSnap)));
+                                        },
+                                        child: const Text("View Details",
+                                            style: const TextStyle(
+                                                fontSize: 12,
+                                                color: Colors.black)),
+                                        style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all<Color>(
+                                                  const Color(0xffA7E92F)),
+                                          shape: MaterialStateProperty.all(
+                                            RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(18.0),
+                                              side: const BorderSide(
+                                                color: Color(0xffA7E92F),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -230,39 +233,14 @@ class _HomeScreenState extends State<HomeScreen> {
                           ));
                         },
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),
             ),
           ),
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: 0,
-            onTap: onChangeNavigation,
-            type: BottomNavigationBarType.fixed,
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person_add),
-                label: 'Store Profile',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.boy_rounded),
-                label: 'Sizes',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.description_outlined),
-                label: 'Details',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.logout),
-                label: 'Logout',
-              ),
-            ],
-            selectedItemColor: Colors.blue,
+          bottomNavigationBar: BottomNavBarWidget(
+            onChange: onChangeNavigation,
           ),
         );
       },

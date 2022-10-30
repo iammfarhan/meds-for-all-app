@@ -1,7 +1,11 @@
+// ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class ResetScreen extends StatefulWidget {
+  const ResetScreen({Key? key}) : super(key: key);
+
   @override
   _ResetScreenState createState() => _ResetScreenState();
 }
@@ -13,25 +17,25 @@ class _ResetScreenState extends State<ResetScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFFFF),
+      resizeToAvoidBottomInset: false,
+      backgroundColor: const Color(0xFFF9F9F9),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              height: 50,
-            ),
+            const SizedBox(height: 50),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
                 Image(
-                    image: AssetImage('assets/images/AppLogo.png'),
-                    width: 220,
-                    height: 220),
+                    image: AssetImage('assets/images/AppLogo1.png'),
+                    width: 150,
+                    height: 150),
               ],
             ),
-            const Text('Reset\nyour password!',
+            SizedBox(height: 30,),
+            const Text('Reset\nYour Password!',
                 textAlign: TextAlign.start,
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700)),
             const SizedBox(
@@ -47,14 +51,14 @@ class _ResetScreenState extends State<ResetScreen> {
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(12)),
                       borderSide:
-                          BorderSide(color: Color(0xffA7E92F), width: 2)),
+                          BorderSide(color: Color(0xff8C52FF), width: 2)),
                   contentPadding: EdgeInsets.fromLTRB(15, 15, 15, 15),
                   labelText: 'Email',
                   prefixIcon: Icon(Icons.mail),
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(12)),
                       borderSide:
-                          BorderSide(color: Color(0xffA7E92F), width: 2))),
+                          BorderSide(color: Color(0xff8C52FF), width: 2))),
             ),
             const SizedBox(height: 40),
             SizedBox(
@@ -128,34 +132,38 @@ class _ResetScreenState extends State<ResetScreen> {
                   "Reset Password",
                   style: TextStyle(
                     fontSize: 16,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
-                    const Color(0xffA7E92F),
+                    const Color(0xff8C52FF),
                   ),
                   shape: MaterialStateProperty.all(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.0),
                       side: const BorderSide(
-                        color: Color(0xffA7E92F),
+                        color: Color(0xff8C52FF),
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-            const SizedBox(height: 30),
+            const SizedBox(height: 60),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 const Text("Want to login?"),
                 const SizedBox(width: 07),
                 GestureDetector(
-                  child: const Text('Login here',
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600, color: Colors.blue)),
+                  child: const Text(
+                    'Login here',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xff8C52FF),
+                    ),
+                  ),
                   onTap: () {
                     Navigator.pushReplacementNamed(context, '/login');
                   },

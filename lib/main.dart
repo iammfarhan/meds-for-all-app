@@ -4,15 +4,18 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:medicine_donation_app/pages/add_meds.dart';
 import 'package:medicine_donation_app/pages/login_screen.dart';
+import 'package:medicine_donation_app/pages/more_screen.dart';
 import 'package:medicine_donation_app/pages/splash_screen.dart';
 import 'pages/home_screen.dart';
 import 'pages/login_screen.dart';
 import 'pages/reset_screen.dart';
 import 'pages/splash_screen.dart';
 import 'pages/signup_screen.dart';
+import 'dart:ffi';
+
+import 'pages/stats_screen.dart';
 
 Future<void> main() async {
-  
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
@@ -74,11 +77,12 @@ class _RoutesState extends State<Routes> {
         '/home': (context) => const HomeScreen(),
         '/signup': (context) => const SignUpScreen(),
         '/reset': (context) => ResetScreen(),
+        '/more': (context) => const MoreScreen(),
+        '/stats': (context) => const StatsScreen(),
         '/addService': (context) => ServiceAddPage(
-            initialized: _initialized,
-            error: _error, 
+              initialized: _initialized,
+              error: _error,
             )
-        
       },
     );
   }

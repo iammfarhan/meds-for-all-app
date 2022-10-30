@@ -39,20 +39,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
       resizeToAvoidBottomInset: false,
       backgroundColor: const Color(0xFFF9F9F9),
       body: SafeArea(
-          child: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).unfocus();
-        },
-        child: Padding(
-            padding: const EdgeInsetsDirectional.all(20),
+        child: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus();
+          },
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(
+                  height: 30,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
                     Image(
-                      image: AssetImage('assets/images/AppLogo.png'),
+                      image: AssetImage('assets/images/AppLogo1.png'),
                       width: 150,
                       height: 150,
                     ),
@@ -80,7 +83,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(12)),
                                   borderSide: BorderSide(
-                                      color: Color(0xffA7E92F), width: 2),
+                                      color: Color(0xff8C52FF), width: 2),
                                 ),
                                 contentPadding:
                                     EdgeInsets.fromLTRB(15, 15, 15, 15),
@@ -92,7 +95,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(12)),
                                     borderSide: BorderSide(
-                                        color: Color(0xffA7E92F), width: 2))),
+                                        color: Color(0xff8C52FF), width: 2))),
                             // onSaved: (newValue) => usersname = newValue,
                             validator: (value) {
                               if (value == null || value.trim().isEmpty) {
@@ -109,10 +112,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             style: const TextStyle(fontSize: 14),
                             decoration: const InputDecoration(
                               enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(12)),
-                                  borderSide: BorderSide(
-                                      color: Color(0xffA7E92F), width: 2)),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(12),
+                                ),
+                                borderSide: BorderSide(
+                                    color: Color(0xff8C52FF), width: 2),
+                              ),
                               contentPadding:
                                   EdgeInsets.fromLTRB(15, 15, 15, 15),
                               labelText: 'Email',
@@ -120,10 +125,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 Icons.mail,
                               ),
                               border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(12),
+                                ),
                                 borderSide: BorderSide(
-                                    color: Color(0xffA7E92F), width: 2),
+                                  color: Color(0xff8C52FF),
+                                  width: 2,
+                                ),
                               ),
                             ),
                             // onSaved: (newValue) => email = newValue,
@@ -141,22 +149,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             autocorrect: !true,
                             style: const TextStyle(fontSize: 14),
                             decoration: const InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12)),
-                                    borderSide: BorderSide(
-                                        color: Color(0xffA7E92F), width: 2)),
-                                contentPadding:
-                                    EdgeInsets.fromLTRB(15, 15, 15, 15),
-                                labelText: 'Password',
-                                prefixIcon: Icon(
-                                  Icons.lock,
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(12),
                                 ),
-                                border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(12)),
-                                    borderSide: BorderSide(
-                                        color: Color(0xffA7E92F), width: 2))),
+                                borderSide: BorderSide(
+                                    color: Color(0xff8C52FF), width: 2),
+                              ),
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(15, 15, 15, 15),
+                              labelText: 'Password',
+                              prefixIcon: Icon(
+                                Icons.lock,
+                              ),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(12),
+                                ),
+                                borderSide: BorderSide(
+                                  color: Color(0xff8C52FF),
+                                  width: 2,
+                                ),
+                              ),
+                            ),
                             // onSaved: (newValue) => password = newValue,
                             onChanged: (value) {
                               if (value.isNotEmpty &&
@@ -194,30 +209,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                       .createUserWithEmailAndPassword(
                                           email: emailTextController.text,
                                           password: passwordTextController.text)
-                                      .then((value) {
-                                    print("Created New Account");
-                                    FocusScope.of(context).unfocus();
-                                    Navigator.pushReplacementNamed(
-                                        context, '/home');
-                                  }).onError((error, stackTrace) {
-                                    print("Error \\\${error.toString()}");
-                                  });
+                                      .then(
+                                    (value) {
+                                      print("Created New Account");
+                                      FocusScope.of(context).unfocus();
+                                      Navigator.pushReplacementNamed(
+                                          context, '/home');
+                                    },
+                                  ).onError(
+                                    (error, stackTrace) {
+                                      print("Error \\\${error.toString()}");
+                                    },
+                                  );
                                 }
                               },
                               child: Text(
                                 "Register",
                                 style: TextStyle(
-                                    color: Colors.black, fontSize: 16),
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                ),
                               ),
                               style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        const Color(0xffA7E92F)),
+                                        const Color(0xff8C52FF)),
                                 shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(12.0),
                                     side: const BorderSide(
-                                      color: Color(0xffA7E92F),
+                                      color: Color(0xff8C52FF),
                                     ),
                                   ),
                                 ),
@@ -230,27 +251,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 Expanded(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      const Text("Already a member?"),
-                      const SizedBox(width: 10),
-                      GestureDetector(
-                        child: const Text('Login here',
-                            style: TextStyle(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Already a member?"),
+                          const SizedBox(width: 10),
+                          GestureDetector(
+                            child: const Text(
+                              'Login here',
+                              style: TextStyle(
                                 fontWeight: FontWeight.w600,
-                                color: Colors.blue)),
-                        onTap: () {
-                          Navigator.pushReplacementNamed(context, '/login');
-                        },
-                      ),
-                    ])
-                  ],
-                ))
+                                color: Color(0xff8C52FF),
+                              ),
+                            ),
+                            onTap: () {
+                              Navigator.pushReplacementNamed(context, '/login');
+                            },
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
               ],
-            )),
-      )),
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
