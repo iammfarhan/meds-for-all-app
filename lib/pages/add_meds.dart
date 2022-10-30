@@ -85,6 +85,7 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
 
     return sizes
         .add({
+          'userid': FirebaseAuth.instance.currentUser!.uid,
           'address': addres,
           'med_name': company_nam,
           'cover_image': cover_image.toString(),
