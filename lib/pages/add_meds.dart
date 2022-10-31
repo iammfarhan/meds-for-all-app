@@ -239,12 +239,13 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(50))),
                             child: IconButton(
-                                onPressed: SelectImageFromGallery,
-                                icon: Icon(
-                                  Icons.camera_alt,
-                                  size: 34.0,
-                                  color: Colors.blue,
-                                ),),
+                              onPressed: SelectImageFromGallery,
+                              icon: Icon(
+                                Icons.camera_alt,
+                                size: 34.0,
+                                color: Colors.blue,
+                              ),
+                            ),
                           )
                         ],
                       ),
@@ -417,7 +418,6 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
                       ],
                     ),
                   ),
-
                 ],
               ),
             ),
