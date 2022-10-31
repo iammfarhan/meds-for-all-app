@@ -125,7 +125,7 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
   }
 
   void onChangeNavigation(int index) {
-    if (index == 1) {
+    if (index == 0) {
       Navigator.pushReplacementNamed(context, '/home');
     } else if (index == 2) {
       Navigator.pushReplacementNamed(context, '/stats');
@@ -426,6 +426,7 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
       ),
       bottomNavigationBar: BottomNavBarWidget(
         onChange: onChangeNavigation,
+        cIndex: 1,
       ),
     );
   }

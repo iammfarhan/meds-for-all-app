@@ -3,13 +3,14 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:flutter_sfsymbols/flutter_sfsymbols.dart';
 
-
 class BottomNavBarWidget extends StatefulWidget {
   const BottomNavBarWidget({
     Key? key,
-    required this.onChange,
+    required this.onChange,  this.cIndex,
   }) : super(key: key);
   final Function(int) onChange;
+  
+  final cIndex;
 
   @override
   State<BottomNavBarWidget> createState() => _BottomNavBarWidgetState();
@@ -47,12 +48,12 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
               icon: LineIcons.pagelines,
               text: 'More',
             ),
-             GButton(
+            GButton(
               icon: LineIcons.lock,
               text: 'Logout',
             ),
           ],
-          selectedIndex: 0,
+          selectedIndex: widget.cIndex,
           onTabChange: widget.onChange,
         ),
       ),

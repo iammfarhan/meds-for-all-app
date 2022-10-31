@@ -14,12 +14,12 @@ class MoreScreen extends StatefulWidget {
 
 class _MoreScreenState extends State<MoreScreen> {
   void onChangeNavigation(int index) {
-    if (index == 1) {
+    if (index == 0) {
       Navigator.pushReplacementNamed(context, '/home');
-    } else if (index == 2) {
+    } else if (index == 1) {
       Navigator.pushReplacementNamed(context, '/addService');
-    } else if (index == 3) {
-      Navigator.pushReplacementNamed(context, '/more');
+    } else if (index == 2) {
+      Navigator.pushReplacementNamed(context, '/stats');
     } else if (index == 4) {
       FirebaseAuth.instance.signOut();
       Navigator.pushReplacementNamed(context, '/login');
@@ -72,8 +72,8 @@ class _MoreScreenState extends State<MoreScreen> {
       ),
       bottomNavigationBar: BottomNavBarWidget(
         onChange: onChangeNavigation,
+        cIndex: 3,
       ),
     );
   }
 }
-
