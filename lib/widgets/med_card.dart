@@ -1,110 +1,139 @@
-/*import 'package:flutter/material.dart';
-import 'package:medicine_donation_app/pages/view_meds_details.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
-Widget MedCard (context, index, controller) {
-  return (Card(
-      clipBehavior: Clip.antiAliasWithSaveLayer,
-      color: Color(0xFFF5F5F5),
-      elevation: 3,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Container(
-            color: Colors.blue.shade100,
-            child: Image.network(
-              storedocs[index]['waist'].toString(),
-              width: double.infinity,
-              height: 120,
-              fit: BoxFit.cover,
+import '../pages/view_details.dart';
+
+Widget MedCard(medsStream) {
+  return StreamBuilder<QuerySnapshot>(
+    stream: medsStream,
+    builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+      if (snapshot.hasError) {
+        print('Something went Wrong');
+      }
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      }
+      return ListView.builder(
+        itemCount: snapshot.data!.docs.length,
+        itemBuilder: (context, index) {
+          final DocumentSnapshot documentSnap = snapshot.data!.docs[index];
+          return (Card(
+            clipBehavior: Clip.antiAliasWithSaveLayer,
+            color: const Color(0xFFF5F5F5),
+            elevation: 3,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
             ),
-          ),
-          Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Align(
-                    alignment: AlignmentDirectional(0, -0.15),
-                    child: Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
-                      child: Text(
-                        '${index.company_name}',
-                        style: TextStyle(
-                          fontFamily: 'Poppins',
-                          color: Color(0xFF151B1E),
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  color: Colors.blue.shade100,
+                  child: Image.network(
+                    documentSnap['cover_image'].toString(),
+                    width: double.infinity,
+                    height: 120,
+                    fit: BoxFit.cover,
                   ),
-                  Row(
+                ),
+                Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Align(
+                          alignment: const AlignmentDirectional(0, -0.15),
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0, 4, 0, 0),
+                            child: Text(
+                              documentSnap['med_name'].toString(),
+                              style: const TextStyle(
+                                fontFamily: 'Poppins',
+                                color: const Color(0xFF151B1E),
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Align(
+                              alignment: const AlignmentDirectional(0.1, -0.05),
+                              child: Text(
+                                'Quantity: ${documentSnap['quant'].toString()}',
+                                textAlign: TextAlign.start,
+                                style: const TextStyle(
+                                  fontFamily: 'Poppins',
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    )),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+                  child: Text(
+                    documentSnap['description'].toString(),
+                    maxLines: 2,
+                    textAlign: TextAlign.left,
+                    style: const TextStyle(fontSize: 13),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(10, 0, 10, 10),
+                  child: Row(
                     mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Align(
-                        alignment: AlignmentDirectional(0.1, -0.05),
-                        child: Text(
-                          index.rating.toString(),
-                          textAlign: TextAlign.start,
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
+                      ElevatedButton(
+                        onPressed: () {
+                          FocusScope.of(context).unfocus();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      ViewProfileDetails(
+                                          documentSnapshot: documentSnap)));
+                        },
+                        child: const Text("View Details",
+                            style: const TextStyle(
+                                fontSize: 12, color: Colors.black)),
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              const Color(0xffA7E92F)),
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18.0),
+                              side: const BorderSide(
+                                color: Color(0xffA7E92F),
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                      
                     ],
                   ),
-                ],
-              )),
-          Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
-            child: Text(
-              index.description.length > 80
-                  ? "${index.description.substring(0, 80)}..."
-                  : '${index.description}',
-              textAlign: TextAlign.left,
-              style: TextStyle(fontSize: 13),
+                ),
+              ],
             ),
-          ),
-          Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 10),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                      onPressed: () {
-                        FocusScope.of(context).unfocus();
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (BuildContext context) =>
-                                    ViewMedDetails(
-                                        /*indexxxx*/)));
-                      },
-                      child:
-                          Text("View Details", style: TextStyle(fontSize: 12)),
-                      style: ButtonStyle(
-                          backgroundColor:
-                              MaterialStateProperty.all<Color>(Colors.blue),
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(18.0),
-                                  side: BorderSide(color: Colors.blue)))))
-                ],
-              ))
-        ],
-      )));
+          ));
+        },
+      );
+    },
+  );
 }
-*/
