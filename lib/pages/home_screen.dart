@@ -99,6 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       bottomNavigationBar: BottomNavBarWidget(
         onChange: onChangeNavigation,
+        cIndex: 0,
       ),
     );
   }

@@ -15,9 +15,9 @@ class StatsScreen extends StatefulWidget {
 
 class _StatsScreenState extends State<StatsScreen> {
   void onChangeNavigation(int index) {
-    if (index == 1) {
+    if (index == 0) {
       Navigator.pushReplacementNamed(context, '/home');
-    } else if (index == 2) {
+    } else if (index == 1) {
       Navigator.pushReplacementNamed(context, '/addService');
     } else if (index == 3) {
       Navigator.pushReplacementNamed(context, '/more');
@@ -95,6 +95,7 @@ class _StatsScreenState extends State<StatsScreen> {
       ),
       bottomNavigationBar: BottomNavBarWidget(
         onChange: onChangeNavigation,
+        cIndex: 2,
       ),
     );
   }
