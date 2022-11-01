@@ -1,11 +1,13 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../widgets/med_stat_card.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ShortageScreen extends StatefulWidget {
-  const ShortageScreen({Key? key}) : super(key: key);
+   ShortageScreen({Key? key}) : super(key: key);
+  final Uri _url = Uri.parse('https://flutter.dev');
+
 
   @override
   State<ShortageScreen> createState() => _ShortageScreenState();
@@ -66,7 +68,7 @@ class _ShortageScreenState extends State<ShortageScreen> {
               width: double.infinity,
               height: 50,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: _launchURL,
                 child: Text(
                   "Go to medicine needs!",
                   style: TextStyle(
@@ -93,5 +95,14 @@ class _ShortageScreenState extends State<ShortageScreen> {
         ),
       ),
     );
+  }
+}
+
+_launchURL() async {
+  const url = 'https://alkhidmat.org/services/health/health.html';
+  if (await canLaunchUrlString(url)) {
+    await launchUrlString(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }
