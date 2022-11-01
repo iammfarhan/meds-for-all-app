@@ -6,10 +6,11 @@ import 'package:flutter_sfsymbols/flutter_sfsymbols.dart';
 class BottomNavBarWidget extends StatefulWidget {
   const BottomNavBarWidget({
     Key? key,
-    required this.onChange,  this.cIndex,
+    required this.onChange,
+    this.cIndex,
   }) : super(key: key);
   final Function(int) onChange;
-  
+
   final cIndex;
 
   @override
@@ -25,7 +26,7 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 8),
         child: GNav(
-          gap: 8,
+          gap: 5,
           activeColor: Colors.white,
           iconSize: 30,
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
@@ -33,24 +34,20 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
           tabBackgroundColor: const Color(0xff8C52FF),
           tabs: const [
             GButton(
-              icon: LineIcons.home,
+              icon: Icons.home,
               text: 'Home',
             ),
             GButton(
-              icon: LineIcons.heart,
+              icon: Icons.add_circle_outline,
               text: 'Donate',
             ),
             GButton(
-              icon: LineIcons.search,
-              text: 'Stats',
+              icon: Icons.assignment,
+              text: 'Donations',
             ),
             GButton(
-              icon: LineIcons.pagelines,
+              icon: Icons.dehaze,
               text: 'More',
-            ),
-            GButton(
-              icon: LineIcons.lock,
-              text: 'Logout',
             ),
           ],
           selectedIndex: widget.cIndex,

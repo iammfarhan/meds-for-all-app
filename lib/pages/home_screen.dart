@@ -1,10 +1,15 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:medicine_donation_app/pages/view_details.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:medicine_donation_app/widgets/option_card.dart';
 
+import '../widgets/carousal_widget.dart';
+import '../widgets/label.dart';
 import '../widgets/med_card.dart';
 import '../widgets/nav_bar.dart';
 
@@ -22,78 +27,78 @@ class _HomeScreenState extends State<HomeScreen> {
     if (index == 1) {
       Navigator.pushReplacementNamed(context, '/addService');
     } else if (index == 2) {
-      Navigator.pushReplacementNamed(context, '/stats');
+      Navigator.pushReplacementNamed(context, '/donation');
     } else if (index == 3) {
       Navigator.pushReplacementNamed(context, '/more');
-    } else if (index == 4) {
-      FirebaseAuth.instance.signOut();
-      Navigator.pushReplacementNamed(context, '/login');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF9F9F9),
+      backgroundColor: Color(0xFFE9E6E6),
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: const Color(0xff8C52FF),
+        title: const Text(
+          'Med For All ',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        elevation: 4,
+      ),
       body: SafeArea(
-        child: GestureDetector(
-          onTap: () {
-            FocusScope.of(context).unfocus();
-          },
-          child: Padding(
-            padding: const EdgeInsetsDirectional.all(15),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: const [
-                    Text('Home',
-                        style: TextStyle(
-                            fontSize: 28, fontWeight: FontWeight.bold))
-                  ],
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        onChanged: (value) {
-                          setState(() {
-                            String searchKey = value;
-                            medsStream = FirebaseFirestore.instance
-                                .collection('meds')
-                                .where('med_name',
-                                    isGreaterThanOrEqualTo: searchKey)
-                                .where('med_name', isLessThan: searchKey + 'z')
-                                .snapshots();
-                          });
-                        },
-                        style: const TextStyle(fontSize: 13),
-                        // ignore: prefer_const_constructors
-                        decoration: InputDecoration(
-                          contentPadding:
-                              const EdgeInsets.fromLTRB(15, 8, 15, 8),
-                          hintText: 'Search for Medicine',
-                          border: const OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              borderSide: const BorderSide(
-                                  color: Colors.blue, width: 2)),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-                const SizedBox(height: 20),
-                Expanded(
-                  child: MedCard(medsStream),
-                ),
-              ],
-            ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 30),
+              CarouselSliderWidget(),
+              SizedBox(height: 30),
+              LableWidget(title: 'Dashboard'),
+              SizedBox(height: 10),
+              OptionCard(
+                optionTitle: "Your Record",
+                optionImage: 'assets/images/trophy.png',
+                optionSubTitle: "Medicine you donated",
+                onTab: () {
+                  Navigator.pushReplacementNamed(context, '/userrecord');
+                },
+              ),
+              SizedBox(height: 20),
+              LableWidget(title: 'App Stats'),
+              SizedBox(height: 10),
+              OptionCard(
+                optionTitle: "Med For All Stats",
+                optionImage: 'assets/images/stats.png',
+                optionSubTitle: "See app stats & impact!",
+                onTab: () {
+                  Navigator.pushReplacementNamed(context, '/stats');
+                },
+              ),
+              SizedBox(height: 20),
+              LableWidget(title: 'Options'),
+              SizedBox(height: 10),
+              OptionCard(
+                optionTitle: "Donate",
+                optionImage: 'assets/images/med2.png',
+                optionSubTitle: "Donate medicine here!",
+                onTab: () {
+                  Navigator.pushReplacementNamed(context, '/addService');
+                },
+              ),
+              SizedBox(height: 10),
+              OptionCard(
+                optionTitle: "Get Medicne",
+                optionImage: 'assets/images/med3.png',
+                optionSubTitle: "Grab FREE Medicine here!",
+                onTab: () {
+                  Navigator.pushReplacementNamed(context, '/donation');
+                },
+              ),
+              SizedBox(height: 20),
+            ],
           ),
         ),
       ),

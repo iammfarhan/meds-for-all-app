@@ -18,35 +18,45 @@ class MedStatCard extends StatefulWidget {
 class _MedStatCardState extends State<MedStatCard> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Image.asset(
-          widget.iconImage,
-          height: 70,
-          width: 70,
-        ),
-        const SizedBox(width: 20),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+    return Container(
+      width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(10),
+          ),
+      child: Padding(
+        padding: const EdgeInsets.all(14.0),
+        child: Row(
           children: [
-            Text(
-              widget.title,
-              style: const TextStyle(
-                  fontSize: 20,
-                  color: Color(0xff8C52FF),
-                  fontWeight: FontWeight.bold),
+            Image.asset(
+              widget.iconImage,
+              height: 60,
+              width: 60,
             ),
-            const SizedBox(height: 8),
-            Text(
-              widget.subTitle,
-              style: const TextStyle(
-                fontSize: 16,
-                color: Colors.black,
-              ),
+            const SizedBox(width: 20),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  widget.title,
+                  style: const TextStyle(
+                      fontSize: 20,
+                      color: Color(0xff8C52FF),
+                      fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  widget.subTitle,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.black,
+                  ),
+                )
+              ],
             )
           ],
-        )
-      ],
+        ),
+      ),
     );
   }
 }

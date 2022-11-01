@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -69,32 +71,33 @@ class _ViewProfileDetailsState extends State<ViewProfileDetails> {
                   children: [
                     Text(widget.documentSnapshot['med_name'],
                         style: TextStyle(
-                            fontSize: 30, fontWeight: FontWeight.bold)),
-                    Row(children: [
-                      RatingBarIndicator(
-                        itemBuilder: (context, index) => Icon(
-                          Icons.star_rounded,
-                          color: Colors.amber,
-                        ),
-                        direction: Axis.horizontal,
-                        rating: 4.0,
-                        unratedColor: Colors.grey.shade300,
-                        itemCount: 5,
-                        itemSize: 20,
-                      ),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text("(${widget.documentSnapshot['quant']})",
-                          style: TextStyle(
-                              fontSize: 14, color: Colors.grey.shade700))
-                    ]),
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff8C52FF),
+                        )),
                     SizedBox(
                       height: 12,
                     ),
-                    Text("Description",
+                    Text(
+                      "Medicine Quantity:",
+                      style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 8),
+                    Text(widget.documentSnapshot['quant'],
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Color(0xff8C52FF),
+                        )),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    Text("Medicine Description",
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.w600)),
+                    SizedBox(height: 8),
                     Container(
                       child: Text(
                           widget.documentSnapshot['description'].toString(),
@@ -103,26 +106,35 @@ class _ViewProfileDetailsState extends State<ViewProfileDetails> {
                     SizedBox(
                       height: 12,
                     ),
-                    Text("Services Names",
+                    Text("Donater Name",
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.w600)),
+                    SizedBox(height: 8),
                     Text(widget.documentSnapshot['name'].toString(),
                         style: TextStyle(fontSize: 16)),
                     SizedBox(
-                      height: 20,
+                      height: 12,
                     ),
-                    Text("Brand Contact",
+                    Text("Donater Contact",
                         style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w500)),
+                            fontSize: 20, fontWeight: FontWeight.w500)),
+                    SizedBox(height: 8),
+                    Text(widget.documentSnapshot['phone'].toString(),
+                        style: TextStyle(fontSize: 16)),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    Text("Pick Up Address",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w500)),
+                    SizedBox(height: 8),
                     Text(widget.documentSnapshot['address'].toString(),
                         style: TextStyle(fontSize: 16)),
                     SizedBox(
-                      height: 3,
+                      height: 12,
                     ),
-                    Text(widget.documentSnapshot['phone'].toString(),
-                        style: TextStyle(fontSize: 16)),
-                    SizedBox(height: 25),
-                    Text("Portfolio",
+                    SizedBox(height: 12),
+                    Text("Medicine Pictures",
                         style: TextStyle(
                             fontSize: 24, fontWeight: FontWeight.w600)),
                     SizedBox(height: 5),
@@ -134,7 +146,7 @@ class _ViewProfileDetailsState extends State<ViewProfileDetails> {
                       mainAxisSpacing: 10,
                       children: List.generate(
                         widget.documentSnapshot['details'].length,
-                        (index) => new Container(
+                        (index) => Container(
                           width: 100,
                           height: 100,
                           child: Image.network(
@@ -154,113 +166,23 @@ class _ViewProfileDetailsState extends State<ViewProfileDetails> {
                     SizedBox(height: 20),
                     Container(
                       width: double.maxFinite,
+                      height: 50,
                       child: ElevatedButton(
-                          child: const Text('Write a Review'),
+                          child: const Text(
+                            'Grab Medicine!',
+                            style: TextStyle(fontSize: 20),
+                          ),
                           style: ButtonStyle(
                               padding: MaterialStateProperty.all<EdgeInsets>(
                                   EdgeInsets.all(10)),
-                              backgroundColor:
-                                  MaterialStateProperty.all<Color>(Colors.blue),
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Color(0xff8C52FF)),
                               shape: MaterialStateProperty.all(
                                   RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30.0),
-                                      side: BorderSide(color: Colors.blue)))),
-                          onPressed: () {
-                            showModalBottomSheet<void>(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return SingleChildScrollView(
-                                  child: Container(
-                                    height: 400,
-                                    color: Colors.white,
-                                    child: Center(
-                                        child: Padding(
-                                      padding:
-                                          EdgeInsets.fromLTRB(20, 30, 20, 20),
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
-                                        children: <Widget>[
-                                          const Text(
-                                              'Please provide your opinion about the Brand',
-                                              style: TextStyle(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w600)),
-                                          SizedBox(
-                                            height: 7,
-                                          ),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              RatingBar.builder(
-                                                initialRating: 3,
-                                                minRating: 1,
-                                                direction: Axis.horizontal,
-                                                allowHalfRating: true,
-                                                itemCount: 5,
-                                                itemPadding:
-                                                    EdgeInsets.symmetric(
-                                                        horizontal: 4.0),
-                                                itemBuilder: (context, _) =>
-                                                    Icon(
-                                                  Icons.star,
-                                                  color: Colors.amber,
-                                                ),
-                                                onRatingUpdate: (rating) {},
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(height: 8),
-                                          TextField(
-                                            style: TextStyle(fontSize: 14),
-                                            minLines: 5,
-                                            maxLines: 6,
-                                            decoration: InputDecoration(
-                                                enabledBorder:
-                                                    OutlineInputBorder(
-                                                        borderSide: BorderSide(
-                                                            color: Colors.blue,
-                                                            width: 2)),
-                                                contentPadding:
-                                                    EdgeInsets.fromLTRB(
-                                                        0, 15, 15, 3),
-                                                border: OutlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        color: Colors.blue,
-                                                        width: 2)),
-                                                hintText: 'Write your review',
-                                                labelText: ""),
-                                          ),
-                                          SizedBox(
-                                            height: 50,
-                                          ),
-                                          Container(
-                                              width: double.maxFinite,
-                                              child: ElevatedButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(context),
-                                                  child: const Text(
-                                                      'Submit Review'),
-                                                  style: ButtonStyle(
-                                                      padding: MaterialStateProperty.all<
-                                                              EdgeInsets>(
-                                                          EdgeInsets.all(10)),
-                                                      backgroundColor:
-                                                          MaterialStateProperty.all<Color>(
-                                                              Colors.blue),
-                                                      shape: MaterialStateProperty.all(
-                                                          RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius.circular(30.0),
-                                                              side: BorderSide(color: Colors.blue)))))),
-                                        ],
-                                      ),
-                                    )),
-                                  ),
-                                );
-                              },
-                            );
-                          }),
+                                      side: BorderSide(
+                                          color: Color(0xff8C52FF))))),
+                          onPressed: () {}),
                     )
                   ],
                 ))
