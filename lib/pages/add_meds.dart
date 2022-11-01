@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last
 
+import 'dart:ffi';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -38,6 +39,7 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
   TextEditingController description = TextEditingController();
   TextEditingController phone = TextEditingController();
   TextEditingController quanti = TextEditingController();
+  bool avail = true;
 
   Future<void> SelectImageFromGallery() async {
     final pickedImage = await picker.getImage(source: ImageSource.gallery);
@@ -66,12 +68,20 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
     var descripton = description.text;
     var addres = address.text;
     var quant = quanti.text;
-    setState(() {
-      loading = true;
-    });
+    setState(
+      () {
+        Future.delayed(
+          Duration(seconds: 10),
+          () {
+            Navigator.pushReplacementNamed(context, '/donation');
+          },
+        );
+      },
+    );
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         content: Text('Saving in Progress..'),
+        duration: Duration(seconds: 10),
       ),
     );
 
@@ -96,6 +106,7 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
           'phone': phon,
           'quant': quant,
           'name': service,
+          'avail': avail,
         })
         .then((value) => print('User Added'))
         .catchError((error) => print('Failed to Add user: $error'));
@@ -150,7 +161,7 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
           ),
         ),
         elevation: 4,
-          leading: IconButton(
+        leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
             color: Colors.white,
@@ -393,21 +404,13 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
                                   onPressed: () {
                                     OnSave();
                                   },
-                                  child: loading
-                                      ? const SizedBox(
-                                          width: 16,
-                                          height: 16,
-                                          child: CircularProgressIndicator(
-                                            strokeWidth: 2.0,
-                                          ),
-                                        )
-                                      : Text(
-                                          "Save",
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 16,
-                                          ),
-                                        ),
+                                  child: Text(
+                                    "Save",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                    ),
+                                  ),
                                   style: ButtonStyle(
                                     backgroundColor:
                                         MaterialStateProperty.all<Color>(

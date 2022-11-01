@@ -5,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:medicine_donation_app/pages/add_meds.dart';
 import 'package:medicine_donation_app/pages/login_screen.dart';
 import 'package:medicine_donation_app/pages/donation_screen.dart';
+import 'package:medicine_donation_app/pages/meds_avail.dart';
 import 'package:medicine_donation_app/pages/meds_donated.dart';
 import 'package:medicine_donation_app/pages/more_screen.dart';
 import 'package:medicine_donation_app/pages/splash_screen.dart';
@@ -88,7 +89,8 @@ class _RoutesState extends State<Routes> {
         '/more': (context) => MoreScreen(),
         '/shortage': (context) => ShortageScreen(),
         '/userrecord': (context) => UserDonatedRecord(),
-        '/addService': (context) => ServiceAddPage(
+        
+            '/addService': (context) => ServiceAddPage(
               initialized: _initialized,
               error: _error,
             ),

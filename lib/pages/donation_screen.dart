@@ -3,6 +3,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:medicine_donation_app/pages/available_meds.dart';
+import 'package:medicine_donation_app/pages/donated_medicine.dart';
 import '../widgets/med_card.dart';
 import '../widgets/nav_bar.dart';
 import 'package:flutter/cupertino.dart';
@@ -18,77 +20,11 @@ class _DonationScreenState extends State<DonationScreen> {
   int selectedTab = 0;
 
   Widget availableMedicine(BuildContext context) {
-    Stream medsStream =
-        FirebaseFirestore.instance.collection('meds').snapshots();
-    return SafeArea(
-      child: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).unfocus();
-        },
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: const [
-                  Text(
-                    'Grab free medicine here!',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: TextFormField(
-                      onChanged: (value) {
-                        setState(() {
-                          String searchKey = value;
-                          medsStream = FirebaseFirestore.instance
-                              .collection('meds')
-                              .where('med_name',
-                                  isGreaterThanOrEqualTo: searchKey)
-                              .where('med_name', isLessThan: searchKey + 'z')
-                              .snapshots();
-                        });
-                      },
-                      style: const TextStyle(fontSize: 13),
-                      // ignore: prefer_const_constructors
-                      decoration: InputDecoration(
-                        contentPadding: const EdgeInsets.fromLTRB(15, 8, 15, 8),
-                        hintText: 'Search for Medicine',
-                        border: const OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide:
-                                const BorderSide(color: Colors.blue, width: 2)),
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(height: 20),
-              Expanded(
-                child: MedCard(medsStream),
-                //  child: availableMedicine(medsStream),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+    return AvailableMeds();
   }
 
   Widget donatedMedicineHistory(BuildContext context) {
-    return Column();
+    return DonatedMedicine();
   }
 
   late List<Widget> content;

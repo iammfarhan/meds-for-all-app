@@ -3,8 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:medicine_donation_app/pages/meds_avail.dart';
 import 'package:medicine_donation_app/pages/view_details.dart';
-
 import '../widgets/donation_card.dart';
 
 class UserDonatedRecord extends StatefulWidget {
@@ -103,16 +103,18 @@ class _UserDonatedRecordState extends State<UserDonatedRecord> {
                             optionImage: documentSnap['cover_image'].toString(),
                             medicineQuantity:
                                 'Quantity: ${documentSnap['quant'].toString()}',
-                                color: Colors.green,
+                            color: snapshot.data!.docs[index]['avail'] == false
+                                ? Colors.red
+                                : Colors.green,
                             onTab: () {
                               FocusScope.of(context).unfocus();
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (BuildContext context) =>
-                                          ViewProfileDetails(
+                                          ViewProfileDetail(
                                               documentSnapshot: documentSnap)));
-                            }, 
+                            },
                           ));
                         },
                       ),

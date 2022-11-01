@@ -90,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(height: 10),
               OptionCard(
-                optionTitle: "Get Medicne",
+                optionTitle: "Get Medicine",
                 optionImage: 'assets/images/med3.png',
                 optionSubTitle: "Grab FREE Medicine here!",
                 onTab: () {

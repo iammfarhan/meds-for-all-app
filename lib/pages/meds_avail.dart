@@ -2,26 +2,23 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-class ViewProfileDetails extends StatefulWidget {
+class ViewProfileDetail extends StatefulWidget {
   final DocumentSnapshot documentSnapshot;
-  const ViewProfileDetails({
+  const ViewProfileDetail({
     Key? key,
     required this.documentSnapshot,
   }) : super(key: key);
 
   @override
-  _ViewProfileDetailsState createState() => _ViewProfileDetailsState();
+  _ViewProfileDetailState createState() => _ViewProfileDetailState();
 }
 
-class _ViewProfileDetailsState extends State<ViewProfileDetails> {
+class _ViewProfileDetailState extends State<ViewProfileDetail> {
   @override
   Widget build(BuildContext context) {
+    var docId = widget.documentSnapshot.reference.id.toString();
     return Scaffold(
         backgroundColor: Color(0xFFFFFFFF),
         body: SingleChildScrollView(
@@ -163,13 +160,24 @@ class _ViewProfileDetailsState extends State<ViewProfileDetails> {
                         ),
                       ),
                     ),
+                    Text("Set Medicine Availabilty",
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.w500)),
+                    SizedBox(height: 8),
+                    Text(
+                        'If Medicine is not available press button to make it Unavailable from Dashboard',
+                        maxLines: 5,
+                        style: TextStyle(fontSize: 16)),
+                    SizedBox(
+                      height: 12,
+                    ),
                     SizedBox(height: 20),
                     Container(
                       width: double.maxFinite,
                       height: 50,
                       child: ElevatedButton(
                           child: const Text(
-                            'Contact Me!',
+                            'Set Medicine Availibilty!',
                             style: TextStyle(fontSize: 20),
                           ),
                           style: ButtonStyle(
@@ -182,7 +190,12 @@ class _ViewProfileDetailsState extends State<ViewProfileDetails> {
                                       borderRadius: BorderRadius.circular(30.0),
                                       side: BorderSide(
                                           color: Color(0xff8C52FF))))),
-                          onPressed: () {}),
+                          onPressed: () {
+                            FirebaseFirestore.instance
+                                .collection('meds')
+                                .doc(docId)
+                                .update({'avail': false});
+                          }),
                     )
                   ],
                 ))
