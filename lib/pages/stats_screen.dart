@@ -1,10 +1,8 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:medicine_donation_app/widgets/divider.dart';
 import '../widgets/med_stat_card.dart';
-import '../widgets/nav_bar.dart';
 
 class StatsScreen extends StatefulWidget {
   const StatsScreen({Key? key}) : super(key: key);
@@ -14,24 +12,21 @@ class StatsScreen extends StatefulWidget {
 }
 
 class _StatsScreenState extends State<StatsScreen> {
-  void onChangeNavigation(int index) {
-    if (index == 0) {
-      Navigator.pushReplacementNamed(context, '/home');
-    } else if (index == 1) {
-      Navigator.pushReplacementNamed(context, '/addService');
-    } else if (index == 3) {
-      Navigator.pushReplacementNamed(context, '/more');
-    } else if (index == 4) {
-      FirebaseAuth.instance.signOut();
-      Navigator.pushReplacementNamed(context, '/login');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF9F9F9),
+      backgroundColor: Color(0xFFE9E6E6),
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: 30,
+          ),
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, '/home');
+          },
+        ),
         title: const Text(
           "Med Stats",
           style: TextStyle(
@@ -75,15 +70,11 @@ class _StatsScreenState extends State<StatsScreen> {
               iconImage: 'assets/images/med1.png',
             ),
             const SizedBox(height: 20),
-            const MedDivider(),
-            const SizedBox(height: 20),
             const MedStatCard(
               title: "450,67\$",
               subTitle: "we saved",
               iconImage: 'assets/images/med2.png',
             ),
-            const SizedBox(height: 20),
-            const MedDivider(),
             const SizedBox(height: 20),
             const MedStatCard(
               title: "530,19",
@@ -92,10 +83,6 @@ class _StatsScreenState extends State<StatsScreen> {
             ),
           ],
         ),
-      ),
-      bottomNavigationBar: BottomNavBarWidget(
-        onChange: onChangeNavigation,
-        cIndex: 2,
       ),
     );
   }

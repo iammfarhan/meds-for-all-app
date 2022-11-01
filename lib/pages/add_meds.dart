@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last
+
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -128,20 +130,18 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
     if (index == 0) {
       Navigator.pushReplacementNamed(context, '/home');
     } else if (index == 2) {
-      Navigator.pushReplacementNamed(context, '/stats');
+      Navigator.pushReplacementNamed(context, '/donation');
     } else if (index == 3) {
       Navigator.pushReplacementNamed(context, '/more');
-    } else if (index == 4) {
-      FirebaseAuth.instance.signOut();
-      Navigator.pushReplacementNamed(context, '/login');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFE9E6E6),
       appBar: AppBar(
-        toolbarHeight: 70,
+        centerTitle: true,
         backgroundColor: const Color(0xff8C52FF),
         title: const Text(
           'Donate Medicine ',
@@ -149,46 +149,18 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
             color: Colors.white,
           ),
         ),
-        actions: [
-          Container(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                height: 45,
-                margin: EdgeInsets.only(right: 10),
-                child: ElevatedButton(
-                  onPressed: () {
-                    OnSave();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: Color(0xff1C1C1C),
-                    onPrimary: Colors.grey.shade400,
-                    onSurface: Colors.grey.shade50,
-                    shadowColor: Colors.white,
-                    padding: const EdgeInsets.all(12),
-                    elevation: 0,
-                  ),
-                  child: loading
-                      ? const SizedBox(
-                          width: 16,
-                          height: 16,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2.0,
-                          ))
-                      : const Text(
-                          'SAVE',
-                          style: TextStyle(
-                              color: Colors.white, fontWeight: FontWeight.w500),
-                        ),
-                ),
-              ),
-            ],
-          ))
-        ],
         elevation: 4,
+          leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: 30,
+          ),
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, '/home');
+          },
+        ),
       ),
-      backgroundColor: Color(0xFFFFFFFF),
       body: SingleChildScrollView(
         child: SafeArea(
           child: GestureDetector(
@@ -305,15 +277,16 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
                           controller: address,
                           style: TextStyle(fontSize: 14),
                           decoration: InputDecoration(
-                              enabledBorder: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.blue, width: 2)),
-                              contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 3),
-                              border: UnderlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: Colors.blue, width: 2)),
-                              hintText: 'Address',
-                              labelText: "Address"),
+                            enabledBorder: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.blue, width: 2)),
+                            contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 3),
+                            border: UnderlineInputBorder(
+                                borderSide:
+                                    BorderSide(color: Colors.blue, width: 2)),
+                            hintText: 'Address',
+                            labelText: "Address",
+                          ),
                         ),
                         TextField(
                           textCapitalization: TextCapitalization.sentences,
@@ -407,11 +380,52 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
                                     decoration: BoxDecoration(
                                       borderRadius:
                                           BorderRadius.all(Radius.circular(5)),
-                                      color: Colors.grey.shade200,
+                                      color: Colors.grey.shade400,
                                     ),
                                   ),
                                 ],
                               ),
+                              SizedBox(height: 20),
+                              SizedBox(
+                                width: double.infinity,
+                                height: 50,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    OnSave();
+                                  },
+                                  child: loading
+                                      ? const SizedBox(
+                                          width: 16,
+                                          height: 16,
+                                          child: CircularProgressIndicator(
+                                            strokeWidth: 2.0,
+                                          ),
+                                        )
+                                      : Text(
+                                          "Save",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 16,
+                                          ),
+                                        ),
+                                  style: ButtonStyle(
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                      Color(0xff8C52FF),
+                                    ),
+                                    shape: MaterialStateProperty.all(
+                                      RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
+                                        side: const BorderSide(
+                                          color: Color(0xff8C52FF),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 20),
                             ],
                           ),
                         ),
