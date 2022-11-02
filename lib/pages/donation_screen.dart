@@ -94,7 +94,7 @@ class _DonationScreenState extends State<DonationScreen> {
       ),
       bottomNavigationBar: BottomNavBarWidget(
         onChange: onChangeNavigation,
-        cIndex: 3,
+        cIndex: 2,
       ),
     );
   }

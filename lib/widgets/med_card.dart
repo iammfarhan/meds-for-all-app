@@ -27,7 +27,7 @@ Widget MedCard(medsStream) {
 
           return (DonationCard(
             color: documentSnap['avail'] == false ? Colors.red : Colors.green,
-            medicineName: ' ${documentSnap['med_name'].toString()}',
+            medicineName: '${documentSnap['med_name'].toString()}',
             optionImage: documentSnap['cover_image'].toString(),
             medicineQuantity: 'Quantity: ${documentSnap['quant'].toString()}',
             onTab: () {

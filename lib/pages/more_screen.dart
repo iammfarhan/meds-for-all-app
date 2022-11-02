@@ -61,7 +61,7 @@ class MoreScreen extends StatelessWidget {
       ),
       bottomNavigationBar: BottomNavBarWidget(
         onChange: onChangeNavigation,
-        cIndex: 0,
+        cIndex: 3,
       ),
     );
   }
