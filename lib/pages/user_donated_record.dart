@@ -34,92 +34,100 @@ class _UserDonatedRecordState extends State<UserDonatedRecord> {
           );
         }
 
-        return Scaffold(
-          backgroundColor: Color(0xFFE9E6E6),
-          appBar: AppBar(
-            centerTitle: true,
-            backgroundColor: const Color(0xff8C52FF),
-            title: const Text(
-              'Donate Medicine ',
-              style: TextStyle(
-                color: Colors.white,
+        return WillPopScope(
+          onWillPop: () async {
+            return false;
+          },
+          child: Scaffold(
+            backgroundColor: Color(0xFFE9E6E6),
+            appBar: AppBar(
+              centerTitle: true,
+              backgroundColor: const Color(0xff8C52FF),
+              title: const Text(
+                'Donate Medicine ',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              elevation: 4,
+              leading: IconButton(
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                  size: 30,
+                ),
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, '/home');
+                },
               ),
             ),
-            elevation: 4,
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-                size: 30,
-              ),
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, '/home');
-              },
-            ),
-          ),
-          body: SafeArea(
-            child: GestureDetector(
-              onTap: () {
-                FocusScope.of(context).unfocus();
-              },
-              child: Padding(
-                padding: const EdgeInsetsDirectional.all(15),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    const Center(
-                      child: Text(
-                        "Medicine you donated",
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
+            body: SafeArea(
+              child: GestureDetector(
+                onTap: () {
+                  FocusScope.of(context).unfocus();
+                },
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.all(15),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Center(
+                        child: Text(
+                          "Medicine you donated",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 10),
-                    const Center(
-                      child: Text(
-                        "Thank you for being part of it!",
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black,
+                      const SizedBox(height: 10),
+                      const Center(
+                        child: Text(
+                          "Thank you for being part of it!",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
-                    ),
-                    SizedBox(height: 30),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: snapshot.data!.docs.length,
-                        itemBuilder: (context, index) {
-                          final DocumentSnapshot documentSnap =
-                              snapshot.data!.docs[index];
-                          return (DonationCard(
-                            medicineName:
-                                ' ${documentSnap['med_name'].toString()}',
-                            optionImage: documentSnap['cover_image'].toString(),
-                            medicineQuantity:
-                                'Quantity: ${documentSnap['quant'].toString()}',
-                            color: snapshot.data!.docs[index]['avail'] == false
-                                ? Colors.red
-                                : Colors.green,
-                            onTab: () {
-                              FocusScope.of(context).unfocus();
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          ViewProfileDetail(
-                                              documentSnapshot: documentSnap)));
-                            },
-                          ));
-                        },
-                      ),
-                    )
-                  ],
+                      SizedBox(height: 30),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: snapshot.data!.docs.length,
+                          itemBuilder: (context, index) {
+                            final DocumentSnapshot documentSnap =
+                                snapshot.data!.docs[index];
+                            return (DonationCard(
+                              medicineName:
+                                  ' ${documentSnap['med_name'].toString()}',
+                              optionImage:
+                                  documentSnap['cover_image'].toString(),
+                              medicineQuantity:
+                                  'Quantity: ${documentSnap['quant'].toString()}',
+                              color:
+                                  snapshot.data!.docs[index]['avail'] == false
+                                      ? Colors.red
+                                      : Colors.green,
+                              onTab: () {
+                                FocusScope.of(context).unfocus();
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            ViewProfileDetail(
+                                                documentSnapshot:
+                                                    documentSnap)));
+                              },
+                            ));
+                          },
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

@@ -50,51 +50,57 @@ class _DonationScreenState extends State<DonationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFFE9E6E6),
-      appBar: AppBar(
-        title: const Text(
-          "Donations",
-          style: TextStyle(
-            fontSize: 20,
-            color: Colors.white,
-          ),
-        ),
-        backgroundColor: const Color(0xff8C52FF),
-        elevation: 1,
-        centerTitle: true,
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(height: 40),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 20),
-            child: Center(
-              child: CupertinoSlidingSegmentedControl<int>(
-                children: {
-                  0: Text("Available Medicine"),
-                  1: Text("Donated History"),
-                },
-                groupValue: selectedTab,
-                onValueChanged: (value) {
-                  setState(
-                    () {
-                      selectedTab = value!;
-                    },
-                  );
-                },
-              ),
+    return WillPopScope(
+      onWillPop: () async {
+       
+         return false; 
+       },
+      child: Scaffold(
+        backgroundColor: Color(0xFFE9E6E6),
+        appBar: AppBar(
+          title: const Text(
+            "Donations",
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.white,
             ),
           ),
-          Expanded(
-            child: content[selectedTab],
-          ),
-        ],
-      ),
-      bottomNavigationBar: BottomNavBarWidget(
-        onChange: onChangeNavigation,
-        cIndex: 2,
+          backgroundColor: const Color(0xff8C52FF),
+          elevation: 1,
+          centerTitle: true,
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 40),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 20),
+              child: Center(
+                child: CupertinoSlidingSegmentedControl<int>(
+                  children: {
+                    0: Text("Available Medicine"),
+                    1: Text("Donated History"),
+                  },
+                  groupValue: selectedTab,
+                  onValueChanged: (value) {
+                    setState(
+                      () {
+                        selectedTab = value!;
+                      },
+                    );
+                  },
+                ),
+              ),
+            ),
+            Expanded(
+              child: content[selectedTab],
+            ),
+          ],
+        ),
+        bottomNavigationBar: BottomNavBarWidget(
+          onChange: onChangeNavigation,
+          cIndex: 2,
+        ),
       ),
     );
   }

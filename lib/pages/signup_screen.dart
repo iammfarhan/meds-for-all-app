@@ -211,7 +211,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                           password: passwordTextController.text)
                                       .then(
                                     (value) {
-                                      print("Created New Account");
                                       FocusScope.of(context).unfocus();
                                       Navigator.pushReplacementNamed(
                                           context, '/home');

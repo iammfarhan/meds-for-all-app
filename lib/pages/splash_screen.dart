@@ -23,24 +23,30 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xff8C52FF),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/images/AppLogo.png',
-                height: 280,
-                width: 280,
-              ),
-              const SpinKitFadingCircle(
-                color: Colors.white,
-                size: 50.0,
-              ),
-            ],
+    return WillPopScope(
+      onWillPop: () async {
+       
+         return false; 
+       },
+      child: Scaffold(
+        backgroundColor: Color(0xff8C52FF),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 5),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset(
+                  'assets/images/AppLogo.png',
+                  height: 280,
+                  width: 280,
+                ),
+                const SpinKitFadingCircle(
+                  color: Colors.white,
+                  size: 50.0,
+                ),
+              ],
+            ),
           ),
         ),
       ),

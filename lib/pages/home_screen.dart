@@ -35,76 +35,82 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xFFE9E6E6),
-      appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: const Color(0xff8C52FF),
-        title: const Text(
-          'Med For All ',
-          style: TextStyle(
-            color: Colors.white,
+    return WillPopScope(
+      onWillPop: () async {
+       
+         return false; 
+       },
+      child: Scaffold(
+        backgroundColor: Color(0xFFE9E6E6),
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: const Color(0xff8C52FF),
+          title: const Text(
+            'Med For All ',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          elevation: 4,
+        ),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 30),
+                CarouselSliderWidget(),
+                SizedBox(height: 30),
+                LableWidget(title: 'Dashboard'),
+                SizedBox(height: 10),
+                OptionCard(
+                  optionTitle: "Your Record",
+                  optionImage: 'assets/images/trophy.png',
+                  optionSubTitle: "Medicine you donated",
+                  onTab: () {
+                    Navigator.pushReplacementNamed(context, '/userrecord');
+                  },
+                ),
+                SizedBox(height: 20),
+                LableWidget(title: 'App Stats'),
+                SizedBox(height: 10),
+                OptionCard(
+                  optionTitle: "Med For All Stats",
+                  optionImage: 'assets/images/stats.png',
+                  optionSubTitle: "See app stats & impact!",
+                  onTab: () {
+                    Navigator.pushReplacementNamed(context, '/stats');
+                  },
+                ),
+                SizedBox(height: 20),
+                LableWidget(title: 'Options'),
+                SizedBox(height: 10),
+                OptionCard(
+                  optionTitle: "Donate",
+                  optionImage: 'assets/images/med2.png',
+                  optionSubTitle: "Donate medicine here!",
+                  onTab: () {
+                    Navigator.pushReplacementNamed(context, '/addService');
+                  },
+                ),
+                SizedBox(height: 10),
+                OptionCard(
+                  optionTitle: "Get Medicine",
+                  optionImage: 'assets/images/med3.png',
+                  optionSubTitle: "Grab FREE Medicine here!",
+                  onTab: () {
+                    Navigator.pushReplacementNamed(context, '/donation');
+                  },
+                ),
+                SizedBox(height: 20),
+              ],
+            ),
           ),
         ),
-        elevation: 4,
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 30),
-              CarouselSliderWidget(),
-              SizedBox(height: 30),
-              LableWidget(title: 'Dashboard'),
-              SizedBox(height: 10),
-              OptionCard(
-                optionTitle: "Your Record",
-                optionImage: 'assets/images/trophy.png',
-                optionSubTitle: "Medicine you donated",
-                onTab: () {
-                  Navigator.pushReplacementNamed(context, '/userrecord');
-                },
-              ),
-              SizedBox(height: 20),
-              LableWidget(title: 'App Stats'),
-              SizedBox(height: 10),
-              OptionCard(
-                optionTitle: "Med For All Stats",
-                optionImage: 'assets/images/stats.png',
-                optionSubTitle: "See app stats & impact!",
-                onTab: () {
-                  Navigator.pushReplacementNamed(context, '/stats');
-                },
-              ),
-              SizedBox(height: 20),
-              LableWidget(title: 'Options'),
-              SizedBox(height: 10),
-              OptionCard(
-                optionTitle: "Donate",
-                optionImage: 'assets/images/med2.png',
-                optionSubTitle: "Donate medicine here!",
-                onTab: () {
-                  Navigator.pushReplacementNamed(context, '/addService');
-                },
-              ),
-              SizedBox(height: 10),
-              OptionCard(
-                optionTitle: "Get Medicine",
-                optionImage: 'assets/images/med3.png',
-                optionSubTitle: "Grab FREE Medicine here!",
-                onTab: () {
-                  Navigator.pushReplacementNamed(context, '/donation');
-                },
-              ),
-              SizedBox(height: 20),
-            ],
-          ),
+        bottomNavigationBar: BottomNavBarWidget(
+          onChange: onChangeNavigation,
+          cIndex: 0,
         ),
-      ),
-      bottomNavigationBar: BottomNavBarWidget(
-        onChange: onChangeNavigation,
-        cIndex: 0,
       ),
     );
   }

@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:url_launcher/url_launcher.dart';
 
 class ViewProfileDetails extends StatefulWidget {
   final DocumentSnapshot documentSnapshot;
@@ -182,7 +183,11 @@ class _ViewProfileDetailsState extends State<ViewProfileDetails> {
                                       borderRadius: BorderRadius.circular(30.0),
                                       side: BorderSide(
                                           color: Color(0xff8C52FF))))),
-                          onPressed: () {}),
+                          onPressed: () {
+                            final number =
+                                widget.documentSnapshot['phone'].toString();
+                            launch('tel://$number');
+                          }),
                     )
                   ],
                 ))
