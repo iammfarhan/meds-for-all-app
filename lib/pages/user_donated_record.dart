@@ -102,6 +102,9 @@ class _UserDonatedRecordState extends State<UserDonatedRecord> {
                             final DocumentSnapshot documentSnap =
                                 snapshot.data!.docs[index];
                             return (DonationCard(
+                              status: documentSnap['avail'] == false
+                                  ? 'Not Available'
+                                  : 'Available',
                               medicineName:
                                   ' ${documentSnap['med_name'].toString()}',
                               optionImage:
