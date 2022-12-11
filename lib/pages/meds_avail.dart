@@ -88,7 +88,7 @@ class _ViewProfileDetailState extends State<ViewProfileDetail> {
                         ),
                       ),
                       SizedBox(height: 8),
-                      Text(widget.documentSnapshot['quant'],
+                      Text(widget.documentSnapshot['quant'].toString(),
                           style: TextStyle(
                             fontSize: 18,
                             color: Color(0xff8C52FF),

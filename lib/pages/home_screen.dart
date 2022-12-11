@@ -37,9 +37,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-       
-         return false; 
-       },
+        return false;
+      },
       child: Scaffold(
         backgroundColor: Color(0xFFE9E6E6),
         appBar: AppBar(
@@ -97,9 +96,29 @@ class _HomeScreenState extends State<HomeScreen> {
                 OptionCard(
                   optionTitle: "Get Medicine",
                   optionImage: 'assets/images/med3.png',
-                  optionSubTitle: "Grab FREE Medicine here!",
+                  optionSubTitle: "Grab FREE medicine here!",
                   onTab: () {
                     Navigator.pushReplacementNamed(context, '/donation');
+                  },
+                ),
+                SizedBox(height: 10),
+                OptionCard(
+                  optionTitle: "Medicine Request",
+                  optionImage: 'assets/images/med3.png',
+                  optionSubTitle: "See meds request here!",
+                  onTab: () {
+                    Navigator.pushReplacementNamed(
+                        context, '/medicinerequestscreen');
+                  },
+                ),
+                SizedBox(height: 10),
+                OptionCard(
+                  optionTitle: "Donation Camps",
+                  optionImage: 'assets/images/med3.png',
+                  optionSubTitle: "Donation camps updates!",
+                  onTab: () {
+                    Navigator.pushReplacementNamed(
+                        context, '/medicinedonationcampscreen');
                   },
                 ),
                 SizedBox(height: 20),

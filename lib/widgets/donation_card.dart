@@ -1,9 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_const_constructors_in_immutables
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sfsymbols/flutter_sfsymbols.dart';
-import 'package:flutter/cupertino.dart';
 
 class DonationCard extends StatelessWidget {
   DonationCard({
@@ -13,9 +10,11 @@ class DonationCard extends StatelessWidget {
     required this.medicineQuantity,
     required this.onTab,
     required this.color,
+    required this.status,
   }) : super(key: key);
   final String medicineName;
   final String medicineQuantity;
+  final String status;
   final String optionImage;
   final VoidCallback onTab;
   final Color color;
@@ -69,27 +68,21 @@ class DonationCard extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 8),
-                        Row(
-                          children: [
-                            Text(
-                              "Availability:",
+                        Container(
+                          decoration: BoxDecoration(
+                            color: color,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(6.0),
+                            child: Text(
+                              status,
                               style: const TextStyle(
-                                fontSize: 16,
-                                color: Colors.black,
+                                fontSize: 15,
+                                color: Colors.white,
                               ),
                             ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Container(
-                              height: 20,
-                              width: 20,
-                              decoration: BoxDecoration(
-                                color: color,
-                                borderRadius: BorderRadius.circular(90),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       ],
                     ),
