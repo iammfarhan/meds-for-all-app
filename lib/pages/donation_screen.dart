@@ -33,7 +33,7 @@ class _DonationScreenState extends State<DonationScreen> {
     if (index == 0) {
       Navigator.pushReplacementNamed(context, '/home');
     } else if (index == 1) {
-      Navigator.pushReplacementNamed(context, '/addService');
+      Navigator.pushReplacementNamed(context, '/mainfeaturescreen');
     } else if (index == 3) {
       Navigator.pushReplacementNamed(context, '/more');
     }

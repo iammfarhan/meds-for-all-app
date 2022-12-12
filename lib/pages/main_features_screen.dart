@@ -3,23 +3,21 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:medicine_donation_app/widgets/option_card.dart';
-import '../widgets/carousal_widget.dart';
-import '../widgets/label.dart';
 import '../widgets/nav_bar.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class MainFeatureScreen extends StatefulWidget {
+  const MainFeatureScreen({Key? key}) : super(key: key);
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<MainFeatureScreen> createState() => _MainFeatureScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _MainFeatureScreenState extends State<MainFeatureScreen> {
   Stream medsStream = FirebaseFirestore.instance.collection('meds').snapshots();
 
   void onChangeNavigation(int index) {
-    if (index == 1) {
-      Navigator.pushReplacementNamed(context, '/mainfeaturescreen');
+    if (index == 0) {
+      Navigator.pushReplacementNamed(context, '/home');
     } else if (index == 2) {
       Navigator.pushReplacementNamed(context, '/donation');
     } else if (index == 3) {
@@ -39,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
           centerTitle: true,
           backgroundColor: const Color(0xff8C52FF),
           title: const Text(
-            'Med For All ',
+            'Med For All Options ',
             style: TextStyle(
               color: Colors.white,
             ),
@@ -52,38 +50,12 @@ class _HomeScreenState extends State<HomeScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(height: 30),
-                CarouselSliderWidget(),
-                SizedBox(height: 30),
-                LableWidget(title: 'Dashboard'),
-                SizedBox(height: 10),
                 OptionCard(
-                  optionTitle: "Your Record",
-                  optionImage: 'assets/images/trophy.png',
-                  optionSubTitle: "Medicine you donated",
+                  optionTitle: "Donate",
+                  optionImage: 'assets/images/med2.png',
+                  optionSubTitle: "Donate medicine here!",
                   onTab: () {
-                    Navigator.pushReplacementNamed(context, '/userrecord');
-                  },
-                ),
-                SizedBox(height: 20),
-                LableWidget(title: 'App Stats'),
-                SizedBox(height: 10),
-                OptionCard(
-                  optionTitle: "Med For All Stats",
-                  optionImage: 'assets/images/stats.png',
-                  optionSubTitle: "See app stats & impact!",
-                  onTab: () {
-                    Navigator.pushReplacementNamed(context, '/stats');
-                  },
-                ),
-                SizedBox(height: 20),
-                LableWidget(title: 'Options'),
-                SizedBox(height: 10),
-                OptionCard(
-                  optionTitle: "Get Medicine",
-                  optionImage: 'assets/images/med3.png',
-                  optionSubTitle: "Grab FREE medicine here!",
-                  onTab: () {
-                    Navigator.pushReplacementNamed(context, '/donation');
+                    Navigator.pushReplacementNamed(context, '/addService');
                   },
                 ),
                 SizedBox(height: 10),
@@ -93,17 +65,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   optionSubTitle: "See meds request here!",
                   onTab: () {
                     Navigator.pushReplacementNamed(
-                        context, '/medicinerequestscreen');
+                        context, '/addmedicinerequestscreen');
                   },
                 ),
                 SizedBox(height: 10),
                 OptionCard(
-                  optionTitle: "Donation Camps",
+                  optionTitle: "Med Donation Camp",
                   optionImage: 'assets/images/med3.png',
                   optionSubTitle: "Donation camps updates!",
                   onTab: () {
                     Navigator.pushReplacementNamed(
-                        context, '/medicinedonationcampscreen');
+                        context, '/adddonationcampscreen');
                   },
                 ),
                 SizedBox(height: 20),
@@ -113,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         bottomNavigationBar: BottomNavBarWidget(
           onChange: onChangeNavigation,
-          cIndex: 0,
+          cIndex: 1,
         ),
       ),
     );
