@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:medicine_donation_app/widgets/medicine_donation_camp_card.dart';
 import 'package:medicine_donation_app/widgets/medicine_request_card.dart';
@@ -11,6 +12,8 @@ class InProgressDonationCamps extends StatefulWidget {
 }
 
 class _InProgressDonationCampsState extends State<InProgressDonationCamps> {
+  Stream medsStream =
+      FirebaseFirestore.instance.collection('medcamp').snapshots();
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -50,16 +53,9 @@ class _InProgressDonationCampsState extends State<InProgressDonationCamps> {
                   color: Colors.grey.shade900,
                 ),
                 const SizedBox(height: 20),
-                MedicineDonationCampCard(
-                    orgName: "JDC Foundation",
-                    address: "House: 02 Street: 04 F8/3 Islamabad",
-                    contactNumber: '03112347453',
-                    description:
-                        "We are collecting medicine donations in our camp for Balochistan flood affected people."),
-
-                // Expanded(
-                //   child: MedCard(medsStream),
-                // ),
+                Expanded(
+                  child: MedDonCard(medsStream),
+                ),
               ],
             ),
           ),
@@ -67,4 +63,37 @@ class _InProgressDonationCampsState extends State<InProgressDonationCamps> {
       ),
     );
   }
+}
+
+Widget MedDonCard(medsStream) {
+  return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+    stream: medsStream,
+    builder: (BuildContext context, snapshot) {
+      if (snapshot.hasError) {
+        print('Something went Wrong');
+      }
+      if (snapshot.data == null) {
+        print('yo');
+      }
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      }
+
+      return ListView.builder(
+        itemCount: snapshot.data?.docs.length,
+        itemBuilder: (context, index) {
+          final DocumentSnapshot documentSnap = snapshot.data!.docs[index];
+
+          return (MedicineDonationCampCard(
+            orgName: documentSnap['name'].toString(),
+            address: documentSnap['address'].toString(),
+            contactNumber: documentSnap['phone'].toString(),
+            description: documentSnap['desc'].toString(),
+          ));
+        },
+      );
+    },
+  );
 }

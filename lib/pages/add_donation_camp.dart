@@ -24,11 +24,11 @@ class _AddDonationCampScreenState extends State<AddDonationCampScreen> {
   bool loading = false;
 
   Future OnSave() async {
-    var medName = medicineName.text;
-    var medQuantity = medicineQuantity.text;
-    var addres = address.text;
-    var perName = personName.text;
-    var cont = contactNumber.text;
+    // var medName = medicineName.text;
+    // var medQuantity = medicineQuantity.text;
+    // var addres = address.text;
+    // var perName = personName.text;
+    // var cont = contactNumber.text;
 
     setState(
       () {
@@ -51,18 +51,17 @@ class _AddDonationCampScreenState extends State<AddDonationCampScreen> {
     return addMedReqData
         .add({
           'userid': FirebaseAuth.instance.currentUser!.uid,
-          'address': addres,
-          'medname': medName,
-          'quant': medQuantity,
-          'name': personName,
-          'phone': contactNumber,
+          'address': address.text,
+          'name': medicineName.text,
+          'desc': personName.text,
+          'phone': contactNumber.text,
         })
         .then((value) => print('User Added'))
         .catchError((error) => print('Failed to Add user: $error'));
   }
 
   CollectionReference addMedReqData =
-      FirebaseFirestore.instance.collection('medsreq');
+      FirebaseFirestore.instance.collection('medcamp');
 
   @override
   Widget build(BuildContext context) {

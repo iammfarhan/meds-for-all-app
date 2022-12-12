@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:medicine_donation_app/widgets/medicine_request_card.dart';
 
@@ -9,6 +10,8 @@ class InProgressRequest extends StatefulWidget {
 }
 
 class _InProgressRequestState extends State<InProgressRequest> {
+  Stream medsStream =
+      FirebaseFirestore.instance.collection('medsreq').snapshots();
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -23,7 +26,6 @@ class _InProgressRequestState extends State<InProgressRequest> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
-              mainAxisSize: MainAxisSize.max,
               children: [
                 Row(
                   mainAxisSize: MainAxisSize.max,
@@ -48,17 +50,9 @@ class _InProgressRequestState extends State<InProgressRequest> {
                   color: Colors.grey.shade900,
                 ),
                 const SizedBox(height: 20),
-                MedicineRequestCard(
-                  medicineName: "Panadol",
-                  medicineQuantity: "4",
-                  address: "House: 02 Street: 04 F8/3 Islamabad",
-                  userName: "Ali",
-                  contactNumber: '03112347453',
+                Expanded(
+                  child: MedReqCard(medsStream),
                 ),
-
-                // Expanded(
-                //   child: MedCard(medsStream),
-                // ),
               ],
             ),
           ),
@@ -66,4 +60,38 @@ class _InProgressRequestState extends State<InProgressRequest> {
       ),
     );
   }
+}
+
+Widget MedReqCard(medsStream) {
+  return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+    stream: medsStream,
+    builder: (BuildContext context, snapshot) {
+      if (snapshot.hasError) {
+        print('Something went Wrong');
+      }
+      if (snapshot.data == null) {
+        print('yo');
+      }
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      }
+
+      return ListView.builder(
+        itemCount: snapshot.data?.docs.length,
+        itemBuilder: (context, index) {
+          final DocumentSnapshot documentSnap = snapshot.data!.docs[index];
+
+          return (MedicineRequestCard(
+            medicineName: documentSnap['medname'].toString(),
+            medicineQuantity: documentSnap['quant'].toString(),
+            address: documentSnap['address'].toString(),
+            userName: documentSnap['name'].toString(),
+            contactNumber: documentSnap['phone'].toString(),
+          ));
+        },
+      );
+    },
+  );
 }

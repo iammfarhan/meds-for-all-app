@@ -25,11 +25,11 @@ class _AddMedicineRequestScreenState extends State<AddMedicineRequestScreen> {
   bool loading = false;
 
   Future OnSave() async {
-    var medName = medicineName.text;
-    var medQuantity = medicineQuantity.text;
-    var addres = address.text;
-    var perName = personName.text;
-    var cont = contactNumber.text;
+    // var medName = medicineName.text;
+    // var medQuantity = medicineQuantity.text;
+    // var addres = address.text;
+    // var perName = personName.text;
+    // var cont = contactNumber.text;
 
     setState(
       () {
@@ -51,11 +51,11 @@ class _AddMedicineRequestScreenState extends State<AddMedicineRequestScreen> {
     return addMedReqData
         .add({
           'userid': FirebaseAuth.instance.currentUser!.uid,
-          'address': addres,
-          'medname': medName,
-          'quant': medQuantity,
-          'name': personName,
-          'phone': contactNumber,
+          'address': address.text,
+          'medname': medicineName.text,
+          'quant': medicineQuantity.text,
+          'name': personName.text,
+          'phone': contactNumber.text,
         })
         .then((value) => print('User Added'))
         .catchError((error) => print('Failed to Add user: $error'));
