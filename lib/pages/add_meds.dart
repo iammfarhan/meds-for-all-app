@@ -1,6 +1,5 @@
 // ignore_for_file: prefer_const_constructors, sort_child_properties_last
 
-import 'dart:ffi';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../widgets/nav_bar.dart';
 
 class ServiceAddPage extends StatefulWidget {
   final bool initialized;
@@ -137,23 +135,12 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
     }
   }
 
-  void onChangeNavigation(int index) {
-    if (index == 0) {
-      Navigator.pushReplacementNamed(context, '/home');
-    } else if (index == 2) {
-      Navigator.pushReplacementNamed(context, '/donation');
-    } else if (index == 3) {
-      Navigator.pushReplacementNamed(context, '/more');
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-       
-         return false; 
-       },
+        return false;
+      },
       child: Scaffold(
         backgroundColor: Color(0xFFE9E6E6),
         appBar: AppBar(
@@ -249,12 +236,13 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
                             style: TextStyle(fontSize: 14),
                             decoration: InputDecoration(
                                 enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.blue, width: 2)),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 3),
+                                    borderSide: BorderSide(
+                                        color: Colors.blue, width: 2)),
+                                contentPadding:
+                                    EdgeInsets.fromLTRB(0, 15, 15, 3),
                                 border: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.blue, width: 2)),
+                                    borderSide: BorderSide(
+                                        color: Colors.blue, width: 2)),
                                 hintText: 'Medicine Name',
                                 labelText: "Medicine  Name"),
                           ),
@@ -264,12 +252,13 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
                             style: TextStyle(fontSize: 14),
                             decoration: InputDecoration(
                                 enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.blue, width: 2)),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 3),
+                                    borderSide: BorderSide(
+                                        color: Colors.blue, width: 2)),
+                                contentPadding:
+                                    EdgeInsets.fromLTRB(0, 15, 15, 3),
                                 border: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.blue, width: 2)),
+                                    borderSide: BorderSide(
+                                        color: Colors.blue, width: 2)),
                                 hintText: 'Name',
                                 labelText: "Name"),
                           ),
@@ -279,12 +268,13 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
                             style: TextStyle(fontSize: 14),
                             decoration: InputDecoration(
                                 enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.blue, width: 2)),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 3),
+                                    borderSide: BorderSide(
+                                        color: Colors.blue, width: 2)),
+                                contentPadding:
+                                    EdgeInsets.fromLTRB(0, 15, 15, 3),
                                 border: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.blue, width: 2)),
+                                    borderSide: BorderSide(
+                                        color: Colors.blue, width: 2)),
                                 hintText: 'Phone Number',
                                 labelText: "Phone Number"),
                           ),
@@ -312,12 +302,13 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
                             maxLines: 5,
                             decoration: InputDecoration(
                                 enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.blue, width: 2)),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 3),
+                                    borderSide: BorderSide(
+                                        color: Colors.blue, width: 2)),
+                                contentPadding:
+                                    EdgeInsets.fromLTRB(0, 15, 15, 3),
                                 border: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.blue, width: 2)),
+                                    borderSide: BorderSide(
+                                        color: Colors.blue, width: 2)),
                                 hintText: 'Quantity',
                                 labelText: "Quantity"),
                           ),
@@ -329,12 +320,13 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
                             maxLines: 5,
                             decoration: InputDecoration(
                                 enabledBorder: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.blue, width: 2)),
-                                contentPadding: EdgeInsets.fromLTRB(0, 15, 15, 3),
+                                    borderSide: BorderSide(
+                                        color: Colors.blue, width: 2)),
+                                contentPadding:
+                                    EdgeInsets.fromLTRB(0, 15, 15, 3),
                                 border: UnderlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: Colors.blue, width: 2)),
+                                    borderSide: BorderSide(
+                                        color: Colors.blue, width: 2)),
                                 hintText: 'Description',
                                 labelText: "Description"),
                           ),
@@ -389,13 +381,14 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
                                             message: "Add your photos",
                                             child: IconButton(
                                                 onPressed: SelectImageOfWork,
-                                                icon: Icon(Icons.add, size: 30)),
+                                                icon:
+                                                    Icon(Icons.add, size: 30)),
                                           )
                                         ],
                                       ),
                                       decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.all(Radius.circular(5)),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(5)),
                                         color: Colors.grey.shade400,
                                       ),
                                     ),
@@ -445,10 +438,6 @@ class _ServiceAddPageState extends State<ServiceAddPage> {
               ),
             ),
           ),
-        ),
-        bottomNavigationBar: BottomNavBarWidget(
-          onChange: onChangeNavigation,
-          cIndex: 1,
         ),
       ),
     );

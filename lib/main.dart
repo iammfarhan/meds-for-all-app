@@ -1,20 +1,23 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:medicine_donation_app/pages/add_donation_camp.dart';
+import 'package:medicine_donation_app/pages/add_medicine_request.dart';
 import 'package:medicine_donation_app/pages/add_meds.dart';
-import 'package:medicine_donation_app/pages/login_screen.dart';
+import 'package:medicine_donation_app/pages/basic%20screens/login_screen.dart';
 import 'package:medicine_donation_app/pages/donation_screen.dart';
+import 'package:medicine_donation_app/pages/main_features_screen.dart';
 import 'package:medicine_donation_app/pages/meds_donated.dart';
 import 'package:medicine_donation_app/pages/more_screen.dart';
-import 'package:medicine_donation_app/pages/splash_screen.dart';
+import 'package:medicine_donation_app/pages/basic%20screens/splash_screen.dart';
 import 'pages/home_screen.dart';
-import 'pages/login_screen.dart';
+import 'pages/basic screens/login_screen.dart';
 import 'pages/medicine_donation_camp_screen.dart';
 import 'pages/medicine_request_screen.dart';
-import 'pages/reset_screen.dart';
-import 'pages/shortages_screen.dart';
-import 'pages/splash_screen.dart';
-import 'pages/signup_screen.dart';
+import 'pages/basic screens/reset_screen.dart';
+import 'pages/feat more/shortages_screen.dart';
+import 'pages/basic screens/splash_screen.dart';
+import 'pages/basic screens/signup_screen.dart';
 import 'pages/stats_screen.dart';
 import 'pages/user_donated_record.dart';
 
@@ -87,8 +90,13 @@ class _RoutesState extends State<Routes> {
         '/more': (context) => MoreScreen(),
         '/shortage': (context) => ShortageScreen(),
         '/userrecord': (context) => UserDonatedRecord(),
-        '/medicinedonationcampscreen': (context) => MedicineDonationCampScreen(),
+        '/mainfeaturescreen': (context) => MainFeatureScreen(),
+        '/medicinedonationcampscreen': (context) =>
+            MedicineDonationCampScreen(),
         '/medicinerequestscreen': (context) => MedicineRequestScreen(),
+        '/adddonationcampscreen': (context) =>
+            AddDonationCampScreen(),
+        '/addmedicinerequestscreen': (context) => AddMedicineRequestScreen(),
         '/addService': (context) => ServiceAddPage(
               initialized: _initialized,
               error: _error,
