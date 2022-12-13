@@ -11,6 +11,8 @@ class MedicineRequestCard extends StatelessWidget {
     required this.userName,
     required this.contactNumber,
     this.onTab,
+    this.color,
+    this.status,
   }) : super(key: key);
   final String userName;
   final String medicineName;
@@ -18,6 +20,8 @@ class MedicineRequestCard extends StatelessWidget {
   final String address;
   final String contactNumber;
   final VoidCallback? onTab;
+  final Color? color;
+  final String? status;
 
   @override
   Widget build(BuildContext context) {

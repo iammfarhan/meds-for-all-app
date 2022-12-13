@@ -30,11 +30,6 @@ class _InProgressRequestState extends State<InProgressRequest> {
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: const [
-                    // Icon(
-                    //   Icons.chevron_right,
-                    //   size: 30,
-                    //   color: Color(0xff8C52FF),
-                    // ),
                     Text(
                       'Medicines Request List',
                       style: TextStyle(
@@ -83,8 +78,7 @@ Widget MedReqCard(medsStream) {
         itemBuilder: (context, index) {
           final DocumentSnapshot documentSnap = snapshot.data!.docs[index];
 
-          return (
-            MedicineRequestCard(
+          return (MedicineRequestCard(
             medicineName: documentSnap['medname'].toString(),
             medicineQuantity: documentSnap['quant'].toString(),
             address: documentSnap['address'].toString(),

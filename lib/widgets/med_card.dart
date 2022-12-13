@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../pages/view_details.dart';
+import '../pages/feat donate medicines/view_details.dart';
 import 'donation_card.dart';
 
 Widget MedCard(medsStream) {

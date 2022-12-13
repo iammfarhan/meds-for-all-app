@@ -1,34 +1,49 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:medicine_donation_app/pages/feat%20donate%20medicines/available_meds.dart';
+import 'package:medicine_donation_app/pages/feat%20donate%20medicines/donated_medicine.dart';
+import '../../widgets/med_card.dart';
+import '../../widgets/nav_bar.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:medicine_donation_app/pages/in_progress_donation_camps.dart';
 
-class MedicineDonationCampScreen extends StatefulWidget {
-  const MedicineDonationCampScreen({Key? key}) : super(key: key);
+class DonationScreen extends StatefulWidget {
+  DonationScreen({Key? key}) : super(key: key);
 
   @override
-  State<MedicineDonationCampScreen> createState() => _MedicineDonationCampScreenState();
+  State<DonationScreen> createState() => _DonationScreenState();
 }
 
-class _MedicineDonationCampScreenState extends State<MedicineDonationCampScreen> {
+class _DonationScreenState extends State<DonationScreen> {
   int selectedTab = 0;
 
-  Widget inProgressDonationCamp(BuildContext context) {
-    return InProgressDonationCamps();
+  Widget availableMedicine(BuildContext context) {
+    return AvailableMeds();
   }
 
-  Widget inProgressDonationCampHistory(BuildContext context) {
-    return InProgressDonationCamps();
+  Widget donatedMedicineHistory(BuildContext context) {
+    return DonatedMedicine();
   }
 
   late List<Widget> content;
 
+  void onChangeNavigation(int index) {
+    if (index == 0) {
+      Navigator.pushReplacementNamed(context, '/home');
+    } else if (index == 1) {
+      Navigator.pushReplacementNamed(context, '/mainfeaturescreen');
+    } else if (index == 3) {
+      Navigator.pushReplacementNamed(context, '/more');
+    }
+  }
+
   @override
   void initState() {
     content = [
-      inProgressDonationCamp(context),
-      inProgressDonationCampHistory(context),
+      availableMedicine(context),
+      donatedMedicineHistory(context),
     ];
     super.initState();
   }
@@ -37,13 +52,14 @@ class _MedicineDonationCampScreenState extends State<MedicineDonationCampScreen>
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-        return false;
-      },
+       
+         return false; 
+       },
       child: Scaffold(
-        backgroundColor: const Color(0xFFE9E6E6),
+        backgroundColor: Color(0xFFE9E6E6),
         appBar: AppBar(
           title: const Text(
-            "Donation Camps",
+            "Donations",
             style: TextStyle(
               fontSize: 20,
               color: Colors.white,
@@ -52,16 +68,6 @@ class _MedicineDonationCampScreenState extends State<MedicineDonationCampScreen>
           backgroundColor: const Color(0xff8C52FF),
           elevation: 1,
           centerTitle: true,
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-              size: 30,
-            ),
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, '/home');
-            },
-          ),
         ),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -72,8 +78,8 @@ class _MedicineDonationCampScreenState extends State<MedicineDonationCampScreen>
               child: Center(
                 child: CupertinoSlidingSegmentedControl<int>(
                   children: {
-                    0: const Text("In Progress"),
-                    1: const Text("Camps History"),
+                    0: Text("Available Medicine"),
+                    1: Text("Donated History"),
                   },
                   groupValue: selectedTab,
                   onValueChanged: (value) {
@@ -90,6 +96,10 @@ class _MedicineDonationCampScreenState extends State<MedicineDonationCampScreen>
               child: content[selectedTab],
             ),
           ],
+        ),
+        bottomNavigationBar: BottomNavBarWidget(
+          onChange: onChangeNavigation,
+          cIndex: 2,
         ),
       ),
     );

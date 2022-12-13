@@ -1,17 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:medicine_donation_app/widgets/medicine_request_card.dart';
+import 'package:medicine_donation_app/widgets/medicine_donation_camp_card.dart';
 
-class InProgressRequest extends StatefulWidget {
-  const InProgressRequest({Key? key}) : super(key: key);
+class DonationCampHistory extends StatefulWidget {
+  const DonationCampHistory({Key? key}) : super(key: key);
 
   @override
-  State<InProgressRequest> createState() => _InProgressRequestState();
+  State<DonationCampHistory> createState() =>
+      _DonationCampHistoryState();
 }
 
-class _InProgressRequestState extends State<InProgressRequest> {
+class _DonationCampHistoryState extends State<DonationCampHistory> {
   Stream medsStream =
-      FirebaseFirestore.instance.collection('medsreq').snapshots();
+      FirebaseFirestore.instance.collection('medcamp').snapshots();
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -26,17 +27,13 @@ class _InProgressRequestState extends State<InProgressRequest> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
+              mainAxisSize: MainAxisSize.max,
               children: [
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: const [
-                    // Icon(
-                    //   Icons.chevron_right,
-                    //   size: 30,
-                    //   color: Color(0xff8C52FF),
-                    // ),
                     Text(
-                      'Medicines Request List',
+                      'Past Donation Camps History List',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
@@ -51,7 +48,7 @@ class _InProgressRequestState extends State<InProgressRequest> {
                 ),
                 const SizedBox(height: 20),
                 Expanded(
-                  child: MedReqCard(medsStream),
+                  child: MedDonCard(medsStream),
                 ),
               ],
             ),
@@ -62,7 +59,7 @@ class _InProgressRequestState extends State<InProgressRequest> {
   }
 }
 
-Widget MedReqCard(medsStream) {
+Widget MedDonCard(medsStream) {
   return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
     stream: medsStream,
     builder: (BuildContext context, snapshot) {
@@ -83,12 +80,11 @@ Widget MedReqCard(medsStream) {
         itemBuilder: (context, index) {
           final DocumentSnapshot documentSnap = snapshot.data!.docs[index];
 
-          return (MedicineRequestCard(
-            medicineName: documentSnap['medname'].toString(),
-            medicineQuantity: documentSnap['quant'].toString(),
+          return (MedicineDonationCampCard(
+            orgName: documentSnap['name'].toString(),
             address: documentSnap['address'].toString(),
-            userName: documentSnap['name'].toString(),
             contactNumber: documentSnap['phone'].toString(),
+            description: documentSnap['desc'].toString(),
           ));
         },
       );
