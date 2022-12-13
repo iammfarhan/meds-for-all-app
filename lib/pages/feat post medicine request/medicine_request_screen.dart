@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'in_progress_request.dart';
+import 'medicine_request_history.dart';
 
 class MedicineRequestScreen extends StatefulWidget {
   const MedicineRequestScreen({Key? key}) : super(key: key);
@@ -19,7 +20,7 @@ class _MedicineRequestScreenState extends State<MedicineRequestScreen> {
   }
 
   Widget inProgressRequestHistory(BuildContext context) {
-    return InProgressRequest();
+    return MedicineRequestHistory();
   }
 
   late List<Widget> content;

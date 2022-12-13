@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:medicine_donation_app/pages/feat%20post%20meds%20donation%20camp/donation_camps_history.dart';
 import 'package:medicine_donation_app/pages/feat%20post%20meds%20donation%20camp/in_progress_donation_camps.dart';
 
 class MedicineDonationCampScreen extends StatefulWidget {
@@ -19,7 +20,7 @@ class _MedicineDonationCampScreenState extends State<MedicineDonationCampScreen>
   }
 
   Widget inProgressDonationCampHistory(BuildContext context) {
-    return InProgressDonationCamps();
+    return DonationCampHistory();
   }
 
   late List<Widget> content;

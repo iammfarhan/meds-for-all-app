@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:medicine_donation_app/pages/feat%20post%20meds%20donation%20camp/camp_status_screen.dart';
 import '../../widgets/medicine_donation_camp_card.dart';
 
 class UserPostedDonationCampScreen extends StatefulWidget {
@@ -107,6 +108,17 @@ class _UserPostedDonationCampScreenState
                               address: documentSnap['address'].toString(),
                               contactNumber: documentSnap['phone'].toString(),
                               description: documentSnap['desc'].toString(),
+                              onTab: () {
+                                FocusScope.of(context).unfocus();
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        CampStatus(
+                                            documentSnapshot: documentSnap),
+                                  ),
+                                );
+                              },
                             ));
                           },
                         ),

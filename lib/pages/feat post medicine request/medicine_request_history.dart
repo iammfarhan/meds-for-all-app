@@ -1,19 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:medicine_donation_app/widgets/medicine_donation_camp_card.dart';
 import 'package:medicine_donation_app/widgets/medicine_request_card.dart';
 
-class InProgressDonationCamps extends StatefulWidget {
-  const InProgressDonationCamps({Key? key}) : super(key: key);
+class MedicineRequestHistory extends StatefulWidget {
+  const MedicineRequestHistory({Key? key}) : super(key: key);
 
   @override
-  State<InProgressDonationCamps> createState() =>
-      _InProgressDonationCampsState();
+  State<MedicineRequestHistory> createState() => _MedicineRequestHistoryState();
 }
 
-class _InProgressDonationCampsState extends State<InProgressDonationCamps> {
+class _MedicineRequestHistoryState extends State<MedicineRequestHistory> {
   Stream medsStream =
-      FirebaseFirestore.instance.collection('medcamp').snapshots();
+      FirebaseFirestore.instance.collection('medsreq').snapshots();
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -28,18 +26,12 @@ class _InProgressDonationCampsState extends State<InProgressDonationCamps> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
-              mainAxisSize: MainAxisSize.max,
               children: [
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: const [
-                    // Icon(
-                    //   Icons.chevron_right,
-                    //   size: 30,
-                    //   color: Color(0xff8C52FF),
-                    // ),
                     Text(
-                      'Medicines Request List',
+                      'Medicines Request History List',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
@@ -54,7 +46,7 @@ class _InProgressDonationCampsState extends State<InProgressDonationCamps> {
                 ),
                 const SizedBox(height: 20),
                 Expanded(
-                  child: MedDonCard(medsStream),
+                  child: MedReqCard(medsStream),
                 ),
               ],
             ),
@@ -65,7 +57,7 @@ class _InProgressDonationCampsState extends State<InProgressDonationCamps> {
   }
 }
 
-Widget MedDonCard(medsStream) {
+Widget MedReqCard(medsStream) {
   return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
     stream: medsStream,
     builder: (BuildContext context, snapshot) {
@@ -86,11 +78,12 @@ Widget MedDonCard(medsStream) {
         itemBuilder: (context, index) {
           final DocumentSnapshot documentSnap = snapshot.data!.docs[index];
 
-          return (MedicineDonationCampCard(
-            orgName: documentSnap['name'].toString(),
+          return (MedicineRequestCard(
+            medicineName: documentSnap['medname'].toString(),
+            medicineQuantity: documentSnap['quant'].toString(),
             address: documentSnap['address'].toString(),
+            userName: documentSnap['name'].toString(),
             contactNumber: documentSnap['phone'].toString(),
-            description: documentSnap['desc'].toString(),
           ));
         },
       );

@@ -32,13 +32,8 @@ class _InProgressDonationCampsState extends State<InProgressDonationCamps> {
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: const [
-                    // Icon(
-                    //   Icons.chevron_right,
-                    //   size: 30,
-                    //   color: Color(0xff8C52FF),
-                    // ),
                     Text(
-                      'Medicines Request List',
+                      'In Progress Donation Camps List',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,

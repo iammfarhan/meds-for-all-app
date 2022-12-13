@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:medicine_donation_app/pages/meds_avail.dart';
-import 'package:medicine_donation_app/pages/view_details.dart';
-import '../widgets/donation_card.dart';
+import 'package:medicine_donation_app/pages/feat%20donate%20medicines/meds_avail.dart';
+import 'package:medicine_donation_app/pages/feat%20donate%20medicines/view_details.dart';
+import '../../widgets/donation_card.dart';
 
 class UserDonatedRecord extends StatefulWidget {
   UserDonatedRecord({Key? key}) : super(key: key);
@@ -106,7 +106,7 @@ class _UserDonatedRecordState extends State<UserDonatedRecord> {
                                   ? 'Not Available'
                                   : 'Available',
                               medicineName:
-                                  ' ${documentSnap['med_name'].toString()}',
+                                  '${documentSnap['med_name'].toString()}',
                               optionImage:
                                   documentSnap['cover_image'].toString(),
                               medicineQuantity:

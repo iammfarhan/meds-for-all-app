@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:medicine_donation_app/pages/feat%20post%20medicine%20request/medicine_request_status.dart';
 import '../../widgets/medicine_request_card.dart';
 
 class UserPostedMedsRecordScreen extends StatefulWidget {
@@ -108,6 +109,17 @@ class _UserPostedMedsRecordScreenState
                               address: documentSnap['address'].toString(),
                               userName: documentSnap['name'].toString(),
                               contactNumber: documentSnap['phone'].toString(),
+                              onTab: () {
+                                FocusScope.of(context).unfocus();
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        MedicineRequestStatus(
+                                            documentSnapshot: documentSnap),
+                                  ),
+                                );
+                              },
                             ));
                           },
                         ),

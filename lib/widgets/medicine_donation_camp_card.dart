@@ -10,11 +10,15 @@ class MedicineDonationCampCard extends StatelessWidget {
     required this.contactNumber,
     required this.description,
     this.onTab,
+    this.color,
+    this.status,
   }) : super(key: key);
   final String orgName;
   final String description;
   final String address;
   final String contactNumber;
+  final Color? color;
+  final String? status;
   final VoidCallback? onTab;
 
   @override
@@ -77,7 +81,7 @@ class MedicineDonationCampCard extends StatelessWidget {
                       color: Colors.black,
                       fontWeight: FontWeight.w600),
                 ),
-                const SizedBox(height:5),
+                const SizedBox(height: 5),
                 Text(
                   orgName,
                   maxLines: 1,
@@ -94,7 +98,7 @@ class MedicineDonationCampCard extends StatelessWidget {
                       color: Colors.black,
                       fontWeight: FontWeight.w600),
                 ),
-                const SizedBox(height:5),
+                const SizedBox(height: 5),
                 Text(
                   contactNumber,
                   style: const TextStyle(

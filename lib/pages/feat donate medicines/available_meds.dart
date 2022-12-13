@@ -1,26 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import '../widgets/med_card.dart';
+import '../../widgets/med_card.dart';
 
-class DonatedMedicine extends StatefulWidget {
-  const DonatedMedicine({Key? key}) : super(key: key);
+class AvailableMeds extends StatefulWidget {
+  const AvailableMeds({Key? key}) : super(key: key);
 
   @override
-  State<DonatedMedicine> createState() => _DonatedMedicineState();
+  State<AvailableMeds> createState() => _AvailableMedsState();
 }
 
-class _DonatedMedicineState extends State<DonatedMedicine> {
+class _AvailableMedsState extends State<AvailableMeds> {
   Stream medsStream = FirebaseFirestore.instance
       .collection('meds')
-      .where("avail", isEqualTo: false)
+      .where("avail", isEqualTo: true)
       .snapshots();
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-       
-         return false; 
-       },
+        return false;
+      },
       child: SafeArea(
         child: GestureDetector(
           onTap: () {
@@ -35,7 +34,7 @@ class _DonatedMedicineState extends State<DonatedMedicine> {
                   mainAxisSize: MainAxisSize.max,
                   children: const [
                     Text(
-                      'Find Donated Medicine History!',
+                      'Grab free medicine here!',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -59,19 +58,21 @@ class _DonatedMedicineState extends State<DonatedMedicine> {
                                 .where('med_name',
                                     isGreaterThanOrEqualTo: searchKey)
                                 .where('med_name', isLessThan: searchKey + 'z')
-                                //.where("avail", isEqualTo: false)
+                                //.where('avail', isEqualTo: true)
                                 .snapshots();
                           });
                         },
                         style: const TextStyle(fontSize: 13),
                         // ignore: prefer_const_constructors
                         decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.fromLTRB(15, 8, 15, 8),
+                          contentPadding:
+                              const EdgeInsets.fromLTRB(15, 8, 15, 8),
                           hintText: 'Search for Medicine',
                           border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                              borderSide:
-                                  const BorderSide(color: Colors.blue, width: 2)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              borderSide: const BorderSide(
+                                  color: Colors.blue, width: 2)),
                         ),
                       ),
                     )
