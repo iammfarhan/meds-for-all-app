@@ -50,60 +50,65 @@ class _MedicineRequestStatusState extends State<MedicineRequestStatus> {
           ),
           body: SingleChildScrollView(
             child: SafeArea(
-                child: Column(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Center(
+                    child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 12),
-                Text("Change Med Request Status",
-                    style:
-                        TextStyle(fontSize: 24, fontWeight: FontWeight.w600)),
-                SizedBox(height: 8),
-                Text(
-                    'Press this button if you have got the desired medicine which you have requested, Its time to make it unavailable from inprogress medicine request list',
-                    maxLines: 5,
-                    style: TextStyle(fontSize: 16)),
-                SizedBox(height: 12),
-                widget.documentSnapshot['avail'] == true
-                    ? Container(
-                        width: double.maxFinite,
-                        height: 50,
-                        child: ElevatedButton(
-                            style: ButtonStyle(
-                                padding: MaterialStateProperty.all<EdgeInsets>(
-                                    EdgeInsets.all(10)),
-                                backgroundColor:
-                                    MaterialStateProperty.all<Color>(
-                                        Color(0xff8C52FF)),
-                                shape: MaterialStateProperty.all(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(30.0),
-                                        side: BorderSide(
-                                            color: Color(0xff8C52FF))))),
-                            onPressed: () {
-                              FirebaseFirestore.instance
-                                  .collection('medsreq')
-                                  .doc(docId)
-                                  .update({'avail': false});
-                            },
-                            child: const Text(
-                              'Press!',
-                              style: TextStyle(fontSize: 20),
-                            )),
-                      )
-                    : Center(
-                        child: Text(
-                          'Thank you for updating medicine request status!',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 22,
-                            color: Color(0xff8C52FF),
-                            fontWeight: FontWeight.w600,
+                    SizedBox(height: 50),
+                    Text("Change Med Request Status",
+                        style:
+                            TextStyle(fontSize: 24, fontWeight: FontWeight.w600)),
+                    SizedBox(height: 15),
+                    Text(
+                        'Press this button if you have got the desired medicine which you have requested, Its time to make it unavailable from inprogress medicine request list',
+                        maxLines: 5,
+                        style: TextStyle(fontSize: 16)),
+                    SizedBox(height: 15),
+                    widget.documentSnapshot['avail'] == true
+                        ? Container(
+                            width: double.maxFinite,
+                            height: 50,
+                            child: ElevatedButton(
+                                style: ButtonStyle(
+                                    padding: MaterialStateProperty.all<EdgeInsets>(
+                                        EdgeInsets.all(10)),
+                                    backgroundColor:
+                                        MaterialStateProperty.all<Color>(
+                                            Color(0xff8C52FF)),
+                                    shape: MaterialStateProperty.all(
+                                        RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(30.0),
+                                            side: BorderSide(
+                                                color: Color(0xff8C52FF))))),
+                                onPressed: () {
+                                  FirebaseFirestore.instance
+                                      .collection('medsreq')
+                                      .doc(docId)
+                                      .update({'avail': false});
+                                },
+                                child: const Text(
+                                  'Press!',
+                                  style: TextStyle(fontSize: 20),
+                                )),
+                          )
+                        : Center(
+                            child: Text(
+                              'Thank you for updating medicine request status!',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 22,
+                                color: Color(0xff8C52FF),
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
               ],
-            )),
+            ),
+                  ),
+                )),
           )),
     );
   }

@@ -11,8 +11,8 @@ class MedicineRequestCard extends StatelessWidget {
     required this.userName,
     required this.contactNumber,
     this.onTab,
-    this.color,
-    this.status,
+    required this.color,
+    required this.status,
   }) : super(key: key);
   final String userName;
   final String medicineName;
@@ -20,8 +20,8 @@ class MedicineRequestCard extends StatelessWidget {
   final String address;
   final String contactNumber;
   final VoidCallback? onTab;
-  final Color? color;
-  final String? status;
+  final Color color;
+  final String status;
 
   @override
   Widget build(BuildContext context) {
@@ -61,13 +61,13 @@ class MedicineRequestCard extends StatelessWidget {
                 const SizedBox(height: 10),
                 Container(
                   decoration: BoxDecoration(
-                    color: Color(0xff8C52FF),
+                    color: color,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
                     child: Text(
-                      "In Progress",
+                      status,
                       style: const TextStyle(
                         fontSize: 15,
                         color: Colors.white,

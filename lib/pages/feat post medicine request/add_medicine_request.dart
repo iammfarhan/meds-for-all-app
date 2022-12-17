@@ -25,6 +25,7 @@ class _AddMedicineRequestScreenState extends State<AddMedicineRequestScreen> {
   TextEditingController contactNumber = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool loading = false;
+  bool avail = true;
   final List<String> errors = [];
 
   void addError({String? error}) {
@@ -69,6 +70,7 @@ class _AddMedicineRequestScreenState extends State<AddMedicineRequestScreen> {
           'quant': medicineQuantity.text,
           'name': personName.text,
           'phone': contactNumber.text,
+          'avail': avail,
         })
         .then((value) => print('User Added'))
         .catchError((error) => print('Failed to Add user: $error'));
@@ -102,7 +104,7 @@ class _AddMedicineRequestScreenState extends State<AddMedicineRequestScreen> {
               size: 30,
             ),
             onPressed: () {
-              Navigator.pushReplacementNamed(context,'/mainfeaturescreen');
+              Navigator.pushReplacementNamed(context, '/mainfeaturescreen');
             },
           ),
         ),

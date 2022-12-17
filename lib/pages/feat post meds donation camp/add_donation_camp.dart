@@ -24,6 +24,7 @@ class _AddDonationCampScreenState extends State<AddDonationCampScreen> {
   TextEditingController contactNumber = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool loading = false;
+  bool avail = true;
   final List<String> errors = [];
 
   void addError({String? error}) {
@@ -68,6 +69,7 @@ class _AddDonationCampScreenState extends State<AddDonationCampScreen> {
           'name': medicineName.text,
           'desc': personName.text,
           'phone': contactNumber.text,
+          'avail': avail,
         })
         .then((value) => print('User Added'))
         .catchError((error) => print('Failed to Add user: $error'));
@@ -222,7 +224,7 @@ class _AddDonationCampScreenState extends State<AddDonationCampScreen> {
                                 hintText: 'Address',
                                 labelText: "Address",
                               ),
-                               validator: (value) {
+                              validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   addError(error: 'AddressNullError');
                                   removeError(error: 'AddressNullError');

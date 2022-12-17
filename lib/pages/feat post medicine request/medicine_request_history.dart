@@ -10,8 +10,10 @@ class MedicineRequestHistory extends StatefulWidget {
 }
 
 class _MedicineRequestHistoryState extends State<MedicineRequestHistory> {
-  Stream medsStream =
-      FirebaseFirestore.instance.collection('medsreq').snapshots();
+   Stream medsStream = FirebaseFirestore.instance
+      .collection('medsreq')
+      .where("avail", isEqualTo: false)
+      .snapshots();
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -79,6 +81,8 @@ Widget MedReqCard(medsStream) {
           final DocumentSnapshot documentSnap = snapshot.data!.docs[index];
 
           return (MedicineRequestCard(
+            color: documentSnap['avail'] == false ? Colors.red : Colors.green,
+            status: documentSnap['avail'] == false ? 'Done' : 'In Progress',
             medicineName: documentSnap['medname'].toString(),
             medicineQuantity: documentSnap['quant'].toString(),
             address: documentSnap['address'].toString(),

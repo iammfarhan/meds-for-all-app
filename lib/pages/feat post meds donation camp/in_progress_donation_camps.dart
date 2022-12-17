@@ -11,8 +11,10 @@ class InProgressDonationCamps extends StatefulWidget {
 }
 
 class _InProgressDonationCampsState extends State<InProgressDonationCamps> {
-  Stream medsStream =
-      FirebaseFirestore.instance.collection('medcamp').snapshots();
+  Stream medsStream = FirebaseFirestore.instance
+      .collection('medcamp')
+      .where("avail", isEqualTo: true)
+      .snapshots();
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -81,6 +83,8 @@ Widget MedDonCard(medsStream) {
           final DocumentSnapshot documentSnap = snapshot.data!.docs[index];
 
           return (MedicineDonationCampCard(
+            color: documentSnap['avail'] == false ? Colors.red : Colors.green,
+            status: documentSnap['avail'] == false ? 'Done' : 'In Progress',
             orgName: documentSnap['name'].toString(),
             address: documentSnap['address'].toString(),
             contactNumber: documentSnap['phone'].toString(),
