@@ -103,6 +103,13 @@ class _UserPostedMedsRecordScreenState
                             final DocumentSnapshot documentSnap =
                                 snapshot.data!.docs[index];
                             return (MedicineRequestCard(
+                              color:
+                                  documentSnap['avail'] == false
+                                      ? Colors.red
+                                      : Colors.green,
+                              status: documentSnap['avail'] == false
+                                  ? 'Done'
+                                  : 'In Progress',
                               medicineName: documentSnap['medname'].toString(),
                               medicineQuantity:
                                   documentSnap['quant'].toString(),

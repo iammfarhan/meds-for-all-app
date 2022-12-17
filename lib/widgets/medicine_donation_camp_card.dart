@@ -10,15 +10,15 @@ class MedicineDonationCampCard extends StatelessWidget {
     required this.contactNumber,
     required this.description,
     this.onTab,
-    this.color,
-    this.status,
+    required this.color,
+    required this.status,
   }) : super(key: key);
   final String orgName;
   final String description;
   final String address;
   final String contactNumber;
-  final Color? color;
-  final String? status;
+  final Color color;
+  final String status;
   final VoidCallback? onTab;
 
   @override
@@ -59,13 +59,13 @@ class MedicineDonationCampCard extends StatelessWidget {
                 const SizedBox(height: 10),
                 Container(
                   decoration: BoxDecoration(
-                    color: Color(0xff8C52FF),
+                    color: color,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(10, 5, 10, 5),
                     child: Text(
-                      "In Progress",
+                      status,
                       style: const TextStyle(
                         fontSize: 15,
                         color: Colors.white,

@@ -104,6 +104,12 @@ class _UserPostedDonationCampScreenState
                             final DocumentSnapshot documentSnap =
                                 snapshot.data!.docs[index];
                             return (MedicineDonationCampCard(
+                              color: documentSnap['avail'] == false
+                                  ? Colors.red
+                                  : Colors.green,
+                              status: documentSnap['avail'] == false
+                                  ? 'Done'
+                                  : 'In Progress',
                               orgName: documentSnap['name'].toString(),
                               address: documentSnap['address'].toString(),
                               contactNumber: documentSnap['phone'].toString(),
