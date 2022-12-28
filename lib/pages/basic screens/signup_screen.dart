@@ -204,23 +204,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             height: 50,
                             child: ElevatedButton(
                               onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  FirebaseAuth.instance
-                                      .createUserWithEmailAndPassword(
-                                          email: emailTextController.text,
-                                          password: passwordTextController.text)
-                                      .then(
-                                    (value) {
-                                      FocusScope.of(context).unfocus();
-                                      Navigator.pushReplacementNamed(
-                                          context, '/home');
-                                    },
-                                  ).onError(
-                                    (error, stackTrace) {
-                                      print("Error \\\${error.toString()}");
-                                    },
-                                  );
-                                }
+                                signup();
                               },
                               child: Text(
                                 "Register",
@@ -280,6 +264,93 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
         ),
       ),
+
     );
+
+    
+  }
+  Future signup() async {
+    try {
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(
+              email: emailTextController.text,
+              password: passwordTextController.text)
+          .then(
+        (value) {
+          FocusScope.of(context).unfocus();
+          Navigator.pushReplacementNamed(context, '/login');
+        },
+      );
+    } on FirebaseAuthException catch (e) {
+      if (e.message == 'The email address is badly formatted.') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+            elevation: 1,
+            margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
+            content: Text(
+              "Invalid E-mail Format.",
+              style: TextStyle(fontSize: 14, color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+            duration: Duration(seconds: 5),
+          ),
+        );
+      } else if (e.message ==
+          'The email address is already in use by another account.') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+            elevation: 1,
+            margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
+            content: Text(
+              "Account already exist.",
+              style: TextStyle(fontSize: 14, color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+            duration: Duration(seconds: 5),
+          ),
+        );
+      } else if (e.message == 'Given String is empty or null.') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+            elevation: 1,
+            margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
+            content: Text(
+              "Invalid e-mail Format.",
+              style: TextStyle(fontSize: 14, color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+            duration: Duration(seconds: 5),
+          ),
+        );
+      } else if (e.message ==
+          'The password is invalid or the user does not have a password.') {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            backgroundColor: Colors.red,
+            behavior: SnackBarBehavior.floating,
+            elevation: 1,
+            margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
+            content: Text(
+              "Account already exist!",
+              style: TextStyle(fontSize: 14, color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+            duration: Duration(seconds: 5),
+          ),
+        );
+      }
+      print(e.toString());
+    }
   }
 }
+
+
+
+
+
