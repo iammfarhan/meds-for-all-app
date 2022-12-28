@@ -46,7 +46,7 @@ class MoreScreen extends StatelessWidget {
             children: [
               SizedBox(height: 30),
               MoreCard(
-                title: "Shoratges",
+                title: "Shortages",
                 iconData: Icons.location_city_outlined,
                 onTab: () {
                   Navigator.pushReplacementNamed(context, '/shortage');
