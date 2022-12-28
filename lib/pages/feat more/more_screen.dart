@@ -3,8 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:medicine_donation_app/widgets/more_card.dart';
-
-import '../widgets/nav_bar.dart';
+import '../../widgets/nav_bar.dart';
 
 class MoreScreen extends StatelessWidget {
   const MoreScreen({Key? key}) : super(key: key);
@@ -23,9 +22,8 @@ class MoreScreen extends StatelessWidget {
 
     return WillPopScope(
       onWillPop: () async {
-       
-         return false; 
-       },
+        return false;
+      },
       child: Scaffold(
         backgroundColor: Color(0xFFE9E6E6),
         appBar: AppBar(

@@ -61,7 +61,7 @@ class _MainFeatureScreenState extends State<MainFeatureScreen> {
                 SizedBox(height: 10),
                 OptionCard(
                   optionTitle: "Medicine Request",
-                  optionImage: 'assets/images/med3.png',
+                  optionImage: 'assets/images/medrequest.png',
                   optionSubTitle: "See meds request here!",
                   onTab: () {
                     Navigator.pushReplacementNamed(
@@ -71,7 +71,7 @@ class _MainFeatureScreenState extends State<MainFeatureScreen> {
                 SizedBox(height: 10),
                 OptionCard(
                   optionTitle: "Med Donation Camp",
-                  optionImage: 'assets/images/med3.png',
+                  optionImage: 'assets/images/camp.png',
                   optionSubTitle: "Donation camps updates!",
                   onTab: () {
                     Navigator.pushReplacementNamed(

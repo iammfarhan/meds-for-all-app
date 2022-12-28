@@ -2,24 +2,25 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:medicine_donation_app/pages/in_progress_donation_camps.dart';
+import 'in_progress_request.dart';
+import 'medicine_request_history.dart';
 
-class MedicineDonationCampScreen extends StatefulWidget {
-  const MedicineDonationCampScreen({Key? key}) : super(key: key);
+class MedicineRequestScreen extends StatefulWidget {
+  const MedicineRequestScreen({Key? key}) : super(key: key);
 
   @override
-  State<MedicineDonationCampScreen> createState() => _MedicineDonationCampScreenState();
+  State<MedicineRequestScreen> createState() => _MedicineRequestScreenState();
 }
 
-class _MedicineDonationCampScreenState extends State<MedicineDonationCampScreen> {
+class _MedicineRequestScreenState extends State<MedicineRequestScreen> {
   int selectedTab = 0;
 
-  Widget inProgressDonationCamp(BuildContext context) {
-    return InProgressDonationCamps();
+  Widget inProgressRequest(BuildContext context) {
+    return InProgressRequest();
   }
 
-  Widget inProgressDonationCampHistory(BuildContext context) {
-    return InProgressDonationCamps();
+  Widget inProgressRequestHistory(BuildContext context) {
+    return MedicineRequestHistory();
   }
 
   late List<Widget> content;
@@ -27,8 +28,8 @@ class _MedicineDonationCampScreenState extends State<MedicineDonationCampScreen>
   @override
   void initState() {
     content = [
-      inProgressDonationCamp(context),
-      inProgressDonationCampHistory(context),
+      inProgressRequest(context),
+      inProgressRequestHistory(context),
     ];
     super.initState();
   }
@@ -43,7 +44,7 @@ class _MedicineDonationCampScreenState extends State<MedicineDonationCampScreen>
         backgroundColor: const Color(0xFFE9E6E6),
         appBar: AppBar(
           title: const Text(
-            "Donation Camps",
+            "Requests",
             style: TextStyle(
               fontSize: 20,
               color: Colors.white,
@@ -73,7 +74,7 @@ class _MedicineDonationCampScreenState extends State<MedicineDonationCampScreen>
                 child: CupertinoSlidingSegmentedControl<int>(
                   children: {
                     0: const Text("In Progress"),
-                    1: const Text("Camps History"),
+                    1: const Text("Requests History"),
                   },
                   groupValue: selectedTab,
                   onValueChanged: (value) {

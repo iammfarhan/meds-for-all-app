@@ -71,10 +71,10 @@ class DonationCard extends StatelessWidget {
                         Container(
                           decoration: BoxDecoration(
                             color: color,
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(20),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.all(6.0),
+                            padding: const EdgeInsets.fromLTRB(8,5,8,5),
                             child: Text(
                               status,
                               style: const TextStyle(

@@ -3,7 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:medicine_donation_app/pages/view_details.dart';
+import 'package:medicine_donation_app/pages/feat%20donate%20medicines/view_details.dart';
 
 class Medsdonated extends StatefulWidget {
    Medsdonated({Key? key}) : super(key: key);

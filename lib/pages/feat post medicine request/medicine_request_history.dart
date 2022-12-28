@@ -2,16 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:medicine_donation_app/widgets/medicine_request_card.dart';
 
-class InProgressRequest extends StatefulWidget {
-  const InProgressRequest({Key? key}) : super(key: key);
+class MedicineRequestHistory extends StatefulWidget {
+  const MedicineRequestHistory({Key? key}) : super(key: key);
 
   @override
-  State<InProgressRequest> createState() => _InProgressRequestState();
+  State<MedicineRequestHistory> createState() => _MedicineRequestHistoryState();
 }
 
-class _InProgressRequestState extends State<InProgressRequest> {
-  Stream medsStream =
-      FirebaseFirestore.instance.collection('medsreq').snapshots();
+class _MedicineRequestHistoryState extends State<MedicineRequestHistory> {
+   Stream medsStream = FirebaseFirestore.instance
+      .collection('medsreq')
+      .where("avail", isEqualTo: false)
+      .snapshots();
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -30,13 +32,8 @@ class _InProgressRequestState extends State<InProgressRequest> {
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   children: const [
-                    // Icon(
-                    //   Icons.chevron_right,
-                    //   size: 30,
-                    //   color: Color(0xff8C52FF),
-                    // ),
                     Text(
-                      'Medicines Request List',
+                      'Medicines Request History List',
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
@@ -84,6 +81,8 @@ Widget MedReqCard(medsStream) {
           final DocumentSnapshot documentSnap = snapshot.data!.docs[index];
 
           return (MedicineRequestCard(
+            color: documentSnap['avail'] == false ? Colors.red : Colors.green,
+            status: documentSnap['avail'] == false ? 'Done' : 'In Progress',
             medicineName: documentSnap['medname'].toString(),
             medicineQuantity: documentSnap['quant'].toString(),
             address: documentSnap['address'].toString(),

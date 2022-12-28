@@ -3,25 +3,26 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:medicine_donation_app/pages/meds_avail.dart';
-import 'package:medicine_donation_app/pages/view_details.dart';
-import '../widgets/donation_card.dart';
+import 'package:medicine_donation_app/pages/feat%20post%20meds%20donation%20camp/camp_status_screen.dart';
+import '../../widgets/medicine_donation_camp_card.dart';
 
-class UserDonatedRecord extends StatefulWidget {
-  UserDonatedRecord({Key? key}) : super(key: key);
+class UserPostedDonationCampScreen extends StatefulWidget {
+  UserPostedDonationCampScreen({Key? key}) : super(key: key);
   final currentUser = FirebaseAuth.instance;
 
   @override
-  State<UserDonatedRecord> createState() => _UserDonatedRecordState();
+  State<UserPostedDonationCampScreen> createState() =>
+      _UserPostedDonationCampScreenState();
 }
 
-class _UserDonatedRecordState extends State<UserDonatedRecord> {
+class _UserPostedDonationCampScreenState
+    extends State<UserPostedDonationCampScreen> {
   @override
   Widget build(BuildContext context) {
     final currentUser = FirebaseAuth.instance;
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
-          .collection('meds')
+          .collection('medcamp')
           .where("userid", isEqualTo: currentUser.currentUser!.uid)
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -44,7 +45,7 @@ class _UserDonatedRecordState extends State<UserDonatedRecord> {
               centerTitle: true,
               backgroundColor: const Color(0xff8C52FF),
               title: const Text(
-                'Donate Medicine ',
+                'Donation Camps ',
                 style: TextStyle(
                   color: Colors.white,
                 ),
@@ -76,7 +77,8 @@ class _UserDonatedRecordState extends State<UserDonatedRecord> {
                       ),
                       const Center(
                         child: Text(
-                          "Medicine you donated",
+                          "Medicine donation camps events you posted!",
+                          textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.black,
@@ -87,7 +89,7 @@ class _UserDonatedRecordState extends State<UserDonatedRecord> {
                       const SizedBox(height: 10),
                       const Center(
                         child: Text(
-                          "Thank you for being part of it!",
+                          "Thank you for sharing of it!",
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.black,
@@ -101,29 +103,27 @@ class _UserDonatedRecordState extends State<UserDonatedRecord> {
                           itemBuilder: (context, index) {
                             final DocumentSnapshot documentSnap =
                                 snapshot.data!.docs[index];
-                            return (DonationCard(
+                            return (MedicineDonationCampCard(
+                              color: documentSnap['avail'] == false
+                                  ? Colors.red
+                                  : Colors.green,
                               status: documentSnap['avail'] == false
-                                  ? 'Not Available'
-                                  : 'Available',
-                              medicineName:
-                                  ' ${documentSnap['med_name'].toString()}',
-                              optionImage:
-                                  documentSnap['cover_image'].toString(),
-                              medicineQuantity:
-                                  'Quantity: ${documentSnap['quant'].toString()}',
-                              color:
-                                  snapshot.data!.docs[index]['avail'] == false
-                                      ? Colors.red
-                                      : Colors.green,
+                                  ? 'Done'
+                                  : 'In Progress',
+                              orgName: documentSnap['name'].toString(),
+                              address: documentSnap['address'].toString(),
+                              contactNumber: documentSnap['phone'].toString(),
+                              description: documentSnap['desc'].toString(),
                               onTab: () {
                                 FocusScope.of(context).unfocus();
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            ViewProfileDetail(
-                                                documentSnapshot:
-                                                    documentSnap)));
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        CampStatus(
+                                            documentSnapshot: documentSnap),
+                                  ),
+                                );
                               },
                             ));
                           },

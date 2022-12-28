@@ -6,6 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class ViewProfileDetail extends StatefulWidget {
   final DocumentSnapshot documentSnapshot;
+
   const ViewProfileDetail({
     Key? key,
     required this.documentSnapshot,
@@ -19,11 +20,11 @@ class _ViewProfileDetailState extends State<ViewProfileDetail> {
   @override
   Widget build(BuildContext context) {
     var docId = widget.documentSnapshot.reference.id.toString();
+
     return WillPopScope(
       onWillPop: () async {
-       
-         return false; 
-       },
+        return false;
+      },
       child: Scaffold(
           backgroundColor: Color(0xFFFFFFFF),
           body: SingleChildScrollView(
@@ -132,9 +133,6 @@ class _ViewProfileDetailState extends State<ViewProfileDetail> {
                       SizedBox(height: 8),
                       Text(widget.documentSnapshot['address'].toString(),
                           style: TextStyle(fontSize: 16)),
-                      SizedBox(
-                        height: 12,
-                      ),
                       SizedBox(height: 12),
                       Text("Medicine Pictures",
                           style: TextStyle(
@@ -159,49 +157,61 @@ class _ViewProfileDetailState extends State<ViewProfileDetail> {
                               height: 100,
                             ),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(5)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5)),
                               color: Colors.grey.shade200,
                             ),
                           ),
                         ),
                       ),
+                      SizedBox(height: 12),
                       Text("Set Medicine Availabilty",
                           style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.w500)),
+                              fontSize: 24, fontWeight: FontWeight.w600)),
                       SizedBox(height: 8),
                       Text(
-                          'If Medicine is not available press button to make it Unavailable from Dashboard',
+                          'Press this button if this medicine is taken someone from you, Its time to make it unavailable from available meds list',
                           maxLines: 5,
                           style: TextStyle(fontSize: 16)),
-                      SizedBox(
-                        height: 12,
-                      ),
-                      SizedBox(height: 20),
-                      Container(
-                        width: double.maxFinite,
-                        height: 50,
-                        child: ElevatedButton(
-                            child: const Text(
-                              'Set Medicine Availibilty!',
-                              style: TextStyle(fontSize: 20),
+                      SizedBox(height: 12),
+                      widget.documentSnapshot['avail'] == true
+                          ? Container(
+                              width: double.maxFinite,
+                              height: 50,
+                              child: ElevatedButton(
+                                  style: ButtonStyle(
+                                      padding:
+                                          MaterialStateProperty.all<EdgeInsets>(
+                                              EdgeInsets.all(10)),
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              Color(0xff8C52FF)),
+                                      shape: MaterialStateProperty.all(
+                                          RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(30.0),
+                                              side: BorderSide(
+                                                  color: Color(0xff8C52FF))))),
+                                  onPressed: () {
+                                    FirebaseFirestore.instance
+                                        .collection('meds')
+                                        .doc(docId)
+                                        .update({'avail': false});
+                                  },
+                                  child: const Text(
+                                    'Press!',
+                                    style: TextStyle(fontSize: 20),
+                                  )),
+                            )
+                          : Text(
+                              'Thank you for donating!',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 22,
+                                color: Color(0xff8C52FF),
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                            style: ButtonStyle(
-                                padding: MaterialStateProperty.all<EdgeInsets>(
-                                    EdgeInsets.all(10)),
-                                backgroundColor: MaterialStateProperty.all<Color>(
-                                    Color(0xff8C52FF)),
-                                shape: MaterialStateProperty.all(
-                                    RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30.0),
-                                        side: BorderSide(
-                                            color: Color(0xff8C52FF))))),
-                            onPressed: () {
-                              FirebaseFirestore.instance
-                                  .collection('meds')
-                                  .doc(docId)
-                                  .update({'avail': false});
-                            }),
-                      )
                     ],
                   ))
             ])),

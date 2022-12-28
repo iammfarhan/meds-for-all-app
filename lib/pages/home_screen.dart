@@ -53,7 +53,15 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 SizedBox(height: 30),
                 CarouselSliderWidget(),
-                SizedBox(height: 30),
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Divider(
+                    height: 1.5,
+                    color: Colors.grey.shade600,
+                  ),
+                ),
+                const SizedBox(height: 14),
                 LableWidget(title: 'Dashboard'),
                 SizedBox(height: 10),
                 OptionCard(
@@ -64,7 +72,34 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.pushReplacementNamed(context, '/userrecord');
                   },
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 10),
+                OptionCard(
+                  optionTitle: "Medicine Requests",
+                  optionImage: 'assets/images/medrequest.png',
+                  optionSubTitle: "Meds requests you posted",
+                  onTab: () {
+                    Navigator.pushReplacementNamed(context, '/usermedsrequest');
+                  },
+                ),
+                SizedBox(height: 10),
+                OptionCard(
+                  optionTitle: "Donation Camps ",
+                  optionImage: 'assets/images/camp.png',
+                  optionSubTitle: "Events you shared",
+                  onTab: () {
+                    Navigator.pushReplacementNamed(
+                        context, '/userdonationcampsrecord');
+                  },
+                ),
+                const SizedBox(height: 14),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Divider(
+                    height: 1.5,
+                    color: Colors.grey.shade600,
+                  ),
+                ),
+                const SizedBox(height: 14),
                 LableWidget(title: 'App Stats'),
                 SizedBox(height: 10),
                 OptionCard(
@@ -75,7 +110,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.pushReplacementNamed(context, '/stats');
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 14),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Divider(
+                    height: 1.5,
+                    color: Colors.grey.shade600,
+                  ),
+                ),
+                const SizedBox(height: 14),
                 LableWidget(title: 'Options'),
                 SizedBox(height: 10),
                 OptionCard(
@@ -89,7 +132,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(height: 10),
                 OptionCard(
                   optionTitle: "Medicine Request",
-                  optionImage: 'assets/images/med3.png',
+                  optionImage: 'assets/images/medrequest.png',
                   optionSubTitle: "See meds request here!",
                   onTab: () {
                     Navigator.pushReplacementNamed(
@@ -99,7 +142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(height: 10),
                 OptionCard(
                   optionTitle: "Donation Camps",
-                  optionImage: 'assets/images/med3.png',
+                  optionImage: 'assets/images/camp.png',
                   optionSubTitle: "Donation camps updates!",
                   onTab: () {
                     Navigator.pushReplacementNamed(

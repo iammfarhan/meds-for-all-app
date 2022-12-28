@@ -2,24 +2,25 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'in_progress_request.dart';
+import 'package:medicine_donation_app/pages/feat%20post%20meds%20donation%20camp/donation_camps_history.dart';
+import 'package:medicine_donation_app/pages/feat%20post%20meds%20donation%20camp/in_progress_donation_camps.dart';
 
-class MedicineRequestScreen extends StatefulWidget {
-  const MedicineRequestScreen({Key? key}) : super(key: key);
+class MedicineDonationCampScreen extends StatefulWidget {
+  const MedicineDonationCampScreen({Key? key}) : super(key: key);
 
   @override
-  State<MedicineRequestScreen> createState() => _MedicineRequestScreenState();
+  State<MedicineDonationCampScreen> createState() => _MedicineDonationCampScreenState();
 }
 
-class _MedicineRequestScreenState extends State<MedicineRequestScreen> {
+class _MedicineDonationCampScreenState extends State<MedicineDonationCampScreen> {
   int selectedTab = 0;
 
-  Widget inProgressRequest(BuildContext context) {
-    return InProgressRequest();
+  Widget inProgressDonationCamp(BuildContext context) {
+    return InProgressDonationCamps();
   }
 
-  Widget inProgressRequestHistory(BuildContext context) {
-    return InProgressRequest();
+  Widget inProgressDonationCampHistory(BuildContext context) {
+    return DonationCampHistory();
   }
 
   late List<Widget> content;
@@ -27,8 +28,8 @@ class _MedicineRequestScreenState extends State<MedicineRequestScreen> {
   @override
   void initState() {
     content = [
-      inProgressRequest(context),
-      inProgressRequestHistory(context),
+      inProgressDonationCamp(context),
+      inProgressDonationCampHistory(context),
     ];
     super.initState();
   }
@@ -43,7 +44,7 @@ class _MedicineRequestScreenState extends State<MedicineRequestScreen> {
         backgroundColor: const Color(0xFFE9E6E6),
         appBar: AppBar(
           title: const Text(
-            "Requests",
+            "Donation Camps",
             style: TextStyle(
               fontSize: 20,
               color: Colors.white,
@@ -73,7 +74,7 @@ class _MedicineRequestScreenState extends State<MedicineRequestScreen> {
                 child: CupertinoSlidingSegmentedControl<int>(
                   children: {
                     0: const Text("In Progress"),
-                    1: const Text("Requests History"),
+                    1: const Text("Camps History"),
                   },
                   groupValue: selectedTab,
                   onValueChanged: (value) {

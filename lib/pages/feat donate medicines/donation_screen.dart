@@ -3,10 +3,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:medicine_donation_app/pages/available_meds.dart';
-import 'package:medicine_donation_app/pages/donated_medicine.dart';
-import '../widgets/med_card.dart';
-import '../widgets/nav_bar.dart';
+import 'package:medicine_donation_app/pages/feat%20donate%20medicines/available_meds.dart';
+import 'package:medicine_donation_app/pages/feat%20donate%20medicines/donated_medicine.dart';
+import '../../widgets/med_card.dart';
+import '../../widgets/nav_bar.dart';
 import 'package:flutter/cupertino.dart';
 
 class DonationScreen extends StatefulWidget {
