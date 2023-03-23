@@ -13,23 +13,28 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    Timer(const Duration(seconds: 5), () {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => Routes()));
-    });
+    Timer(
+      const Duration(seconds: 5),
+      () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const Routes(),
+          ),
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-       
-         return false; 
-       },
+        return false;
+      },
       child: Scaffold(
-        backgroundColor: Color(0xff8C52FF),
+        backgroundColor: const Color(0xff8C52FF),
         body: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),

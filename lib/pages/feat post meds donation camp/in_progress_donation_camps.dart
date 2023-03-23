@@ -65,12 +65,8 @@ Widget MedDonCard(medsStream) {
   return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
     stream: medsStream,
     builder: (BuildContext context, snapshot) {
-      if (snapshot.hasError) {
-        print('Something went Wrong');
-      }
-      if (snapshot.data == null) {
-        print('yo');
-      }
+      if (snapshot.hasError) {}
+      if (snapshot.data == null) {}
       if (snapshot.connectionState == ConnectionState.waiting) {
         return const Center(
           child: CircularProgressIndicator(),

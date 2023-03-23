@@ -1,12 +1,10 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:medicine_donation_app/pages/feat%20donate%20medicines/view_details.dart';
 
 class Medsdonated extends StatefulWidget {
-   Medsdonated({Key? key}) : super(key: key);
+  Medsdonated({Key? key}) : super(key: key);
   final currentUser = FirebaseAuth.instance;
 
   @override
@@ -14,8 +12,6 @@ class Medsdonated extends StatefulWidget {
 }
 
 class _MedsdonatedState extends State<Medsdonated> {
- 
-
   void onChangeNavigation(int index) {
     if (index == 1) {
       Navigator.pushReplacementNamed(context, '/addService');
@@ -33,7 +29,10 @@ class _MedsdonatedState extends State<Medsdonated> {
   Widget build(BuildContext context) {
     final currentUser = FirebaseAuth.instance;
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('meds').where("userid",isEqualTo: currentUser.currentUser!.uid ).snapshots(),
+      stream: FirebaseFirestore.instance
+          .collection('meds')
+          .where("userid", isEqualTo: currentUser.currentUser!.uid)
+          .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
           print('Something went Wrong');
@@ -42,16 +41,12 @@ class _MedsdonatedState extends State<Medsdonated> {
           return const Center(
             child: CircularProgressIndicator(),
           );
-        
         }
-
-        
 
         return WillPopScope(
           onWillPop: () async {
-       
-         return false; 
-       },
+            return false;
+          },
           child: Scaffold(
             backgroundColor: const Color(0xFFF9F9F9),
             body: SafeArea(
@@ -81,20 +76,18 @@ class _MedsdonatedState extends State<Medsdonated> {
                           Expanded(
                             child: TextFormField(
                               textCapitalization: TextCapitalization.sentences,
-        
                               onChanged: (string) {
                                 setState(() {});
                               },
                               style: const TextStyle(fontSize: 13),
-                              // ignore: prefer_const_constructors
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 contentPadding:
-                                    const EdgeInsets.fromLTRB(15, 8, 15, 8),
+                                    EdgeInsets.fromLTRB(15, 8, 15, 8),
                                 hintText: 'Search for Medicine',
-                                border: const OutlineInputBorder(
+                                border: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(10)),
-                                    borderSide: const BorderSide(
+                                    borderSide: BorderSide(
                                         color: Colors.blue, width: 2)),
                               ),
                             ),
@@ -139,17 +132,20 @@ class _MedsdonatedState extends State<Medsdonated> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           Align(
-                                            alignment: const AlignmentDirectional(
-                                                0, -0.15),
+                                            alignment:
+                                                const AlignmentDirectional(
+                                                    0, -0.15),
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
-                                                  .fromSTEB(0, 4, 0, 0),
+                                              padding:
+                                                  const EdgeInsetsDirectional
+                                                      .fromSTEB(0, 4, 0, 0),
                                               child: Text(
                                                 documentSnap['med_name']
                                                     .toString(),
                                                 style: const TextStyle(
                                                   fontFamily: 'Poppins',
-                                                  color: const Color(0xFF151B1E),
+                                                  color:
+                                                      const Color(0xFF151B1E),
                                                   fontSize: 18,
                                                   fontWeight: FontWeight.bold,
                                                 ),
@@ -183,8 +179,9 @@ class _MedsdonatedState extends State<Medsdonated> {
                                         ],
                                       )),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        10, 10, 10, 10),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            10, 10, 10, 10),
                                     child: Text(
                                       documentSnap['description'].toString(),
                                       maxLines: 2,
@@ -193,8 +190,9 @@ class _MedsdonatedState extends State<Medsdonated> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        10, 0, 10, 10),
+                                    padding:
+                                        const EdgeInsetsDirectional.fromSTEB(
+                                            10, 0, 10, 10),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment: MainAxisAlignment.end,
@@ -202,33 +200,40 @@ class _MedsdonatedState extends State<Medsdonated> {
                                           CrossAxisAlignment.center,
                                       children: [
                                         ElevatedButton(
-                                            onPressed: () {
-                                              FocusScope.of(context).unfocus();
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (BuildContext
-                                                              context) =>
-                                                          ViewProfileDetails(
-                                                              documentSnapshot:
-                                                                  documentSnap)));
-                                            },
-                                            child: Text("View Details",
-                                                style: TextStyle(
-                                                    fontSize: 12,
-                                                    color: Colors.black)),
-                                            style: ButtonStyle(
-                                                backgroundColor:
-                                                    MaterialStateProperty.all<
-                                                        Color>(Color(0xffA7E92F)),
-                                                shape: MaterialStateProperty.all(
-                                                    RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                18.0),
-                                                        side: const BorderSide(
-                                                            color: Color(
-                                                                0xffA7E92F))))))
+                                          onPressed: () {
+                                            FocusScope.of(context).unfocus();
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        ViewProfileDetails(
+                                                            documentSnapshot:
+                                                                documentSnap),
+                                              ),
+                                            );
+                                          },
+                                          style: ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStateProperty.all<
+                                                    Color>(Color(0xffA7E92F)),
+                                            shape: MaterialStateProperty.all(
+                                              RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(18.0),
+                                                side: const BorderSide(
+                                                  color: Color(0xffA7E92F),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          child: const Text(
+                                            "View Details",
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                color: Colors.black),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),

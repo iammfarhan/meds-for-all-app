@@ -18,9 +18,8 @@ class _DonatedMedicineState extends State<DonatedMedicine> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-       
-         return false; 
-       },
+        return false;
+      },
       child: SafeArea(
         child: GestureDetector(
           onTap: () {
@@ -59,19 +58,18 @@ class _DonatedMedicineState extends State<DonatedMedicine> {
                                 .where('med_name',
                                     isGreaterThanOrEqualTo: searchKey)
                                 .where('med_name', isLessThan: searchKey + 'z')
-                                //.where("avail", isEqualTo: false)
                                 .snapshots();
                           });
                         },
                         style: const TextStyle(fontSize: 13),
-                        // ignore: prefer_const_constructors
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.fromLTRB(15, 8, 15, 8),
+                        decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.fromLTRB(15, 8, 15, 8),
                           hintText: 'Search for Medicine',
-                          border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(10)),
-                              borderSide:
-                                  const BorderSide(color: Colors.blue, width: 2)),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide:
+                                BorderSide(color: Colors.blue, width: 2),
+                          ),
                         ),
                       ),
                     )

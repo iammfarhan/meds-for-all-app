@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -26,9 +24,7 @@ class _UserPostedMedsRecordScreenState
           .where("userid", isEqualTo: currentUser.currentUser!.uid)
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) {
-          print('Something went Wrong');
-        }
+        if (snapshot.hasError) {}
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
             child: CircularProgressIndicator(),
@@ -40,7 +36,7 @@ class _UserPostedMedsRecordScreenState
             return false;
           },
           child: Scaffold(
-            backgroundColor: Color(0xFFE9E6E6),
+            backgroundColor: const Color(0xFFE9E6E6),
             appBar: AppBar(
               centerTitle: true,
               backgroundColor: const Color(0xff8C52FF),
@@ -52,7 +48,7 @@ class _UserPostedMedsRecordScreenState
               ),
               elevation: 4,
               leading: IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back,
                   color: Colors.white,
                   size: 30,
@@ -95,7 +91,7 @@ class _UserPostedMedsRecordScreenState
                           ),
                         ),
                       ),
-                      SizedBox(height: 30),
+                      const SizedBox(height: 30),
                       Expanded(
                         child: ListView.builder(
                           itemCount: snapshot.data!.docs.length,
@@ -103,10 +99,9 @@ class _UserPostedMedsRecordScreenState
                             final DocumentSnapshot documentSnap =
                                 snapshot.data!.docs[index];
                             return (MedicineRequestCard(
-                              color:
-                                  documentSnap['avail'] == false
-                                      ? Colors.red
-                                      : Colors.green,
+                              color: documentSnap['avail'] == false
+                                  ? Colors.red
+                                  : Colors.green,
                               status: documentSnap['avail'] == false
                                   ? 'Done'
                                   : 'In Progress',

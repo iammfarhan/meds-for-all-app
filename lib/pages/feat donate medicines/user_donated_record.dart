@@ -1,10 +1,7 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:medicine_donation_app/pages/feat%20donate%20medicines/meds_avail.dart';
-import 'package:medicine_donation_app/pages/feat%20donate%20medicines/view_details.dart';
 import '../../widgets/donation_card.dart';
 
 class UserDonatedRecord extends StatefulWidget {
@@ -51,7 +48,7 @@ class _UserDonatedRecordState extends State<UserDonatedRecord> {
               ),
               elevation: 4,
               leading: IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.arrow_back,
                   color: Colors.white,
                   size: 30,
@@ -106,7 +103,7 @@ class _UserDonatedRecordState extends State<UserDonatedRecord> {
                                   ? 'Not Available'
                                   : 'Available',
                               medicineName:
-                                  '${documentSnap['med_name'].toString()}',
+                                  documentSnap['med_name'].toString(),
                               optionImage:
                                   documentSnap['cover_image'].toString(),
                               medicineQuantity:
@@ -118,12 +115,13 @@ class _UserDonatedRecordState extends State<UserDonatedRecord> {
                               onTab: () {
                                 FocusScope.of(context).unfocus();
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            ViewProfileDetail(
-                                                documentSnapshot:
-                                                    documentSnap)));
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        ViewProfileDetail(
+                                            documentSnapshot: documentSnap),
+                                  ),
+                                );
                               },
                             ));
                           },

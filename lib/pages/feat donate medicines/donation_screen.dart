@@ -1,16 +1,11 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
-
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:medicine_donation_app/pages/feat%20donate%20medicines/available_meds.dart';
 import 'package:medicine_donation_app/pages/feat%20donate%20medicines/donated_medicine.dart';
-import '../../widgets/med_card.dart';
 import '../../widgets/nav_bar.dart';
 import 'package:flutter/cupertino.dart';
 
 class DonationScreen extends StatefulWidget {
-  DonationScreen({Key? key}) : super(key: key);
+  const DonationScreen({Key? key}) : super(key: key);
 
   @override
   State<DonationScreen> createState() => _DonationScreenState();
@@ -20,11 +15,11 @@ class _DonationScreenState extends State<DonationScreen> {
   int selectedTab = 0;
 
   Widget availableMedicine(BuildContext context) {
-    return AvailableMeds();
+    return const AvailableMeds();
   }
 
   Widget donatedMedicineHistory(BuildContext context) {
-    return DonatedMedicine();
+    return const DonatedMedicine();
   }
 
   late List<Widget> content;
@@ -52,11 +47,10 @@ class _DonationScreenState extends State<DonationScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-       
-         return false; 
-       },
+        return false;
+      },
       child: Scaffold(
-        backgroundColor: Color(0xFFE9E6E6),
+        backgroundColor: const Color(0xFFE9E6E6),
         appBar: AppBar(
           title: const Text(
             "Donations",
@@ -77,7 +71,7 @@ class _DonationScreenState extends State<DonationScreen> {
               padding: const EdgeInsets.only(bottom: 20),
               child: Center(
                 child: CupertinoSlidingSegmentedControl<int>(
-                  children: {
+                  children: const {
                     0: Text("Available Medicine"),
                     1: Text("Donated History"),
                   },

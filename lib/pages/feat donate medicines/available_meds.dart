@@ -71,7 +71,7 @@ class _AvailableMedsState extends State<AvailableMeds> {
                           border: const OutlineInputBorder(
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
-                              borderSide: const BorderSide(
+                              borderSide: BorderSide(
                                   color: Colors.blue, width: 2)),
                         ),
                       ),
@@ -81,7 +81,6 @@ class _AvailableMedsState extends State<AvailableMeds> {
                 const SizedBox(height: 20),
                 Expanded(
                   child: MedCard(medsStream),
-                  // child: availableMedicine(medsStream),
                 ),
               ],
             ),

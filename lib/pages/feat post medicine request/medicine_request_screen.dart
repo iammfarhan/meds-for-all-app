@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'in_progress_request.dart';
@@ -16,11 +14,11 @@ class _MedicineRequestScreenState extends State<MedicineRequestScreen> {
   int selectedTab = 0;
 
   Widget inProgressRequest(BuildContext context) {
-    return InProgressRequest();
+    return const InProgressRequest();
   }
 
   Widget inProgressRequestHistory(BuildContext context) {
-    return MedicineRequestHistory();
+    return const MedicineRequestHistory();
   }
 
   late List<Widget> content;
@@ -72,9 +70,9 @@ class _MedicineRequestScreenState extends State<MedicineRequestScreen> {
               padding: const EdgeInsets.only(bottom: 20),
               child: Center(
                 child: CupertinoSlidingSegmentedControl<int>(
-                  children: {
-                    0: const Text("In Progress"),
-                    1: const Text("Requests History"),
+                  children: const {
+                    0: Text("In Progress"),
+                    1: Text("Requests History"),
                   },
                   groupValue: selectedTab,
                   onValueChanged: (value) {

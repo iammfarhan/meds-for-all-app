@@ -1,13 +1,9 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sort_child_properties_last
-
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 class ShortageScreen extends StatefulWidget {
-   ShortageScreen({Key? key}) : super(key: key);
+  ShortageScreen({Key? key}) : super(key: key);
   final Uri _url = Uri.parse('https://flutter.dev');
-
 
   @override
   State<ShortageScreen> createState() => _ShortageScreenState();
@@ -18,14 +14,13 @@ class _ShortageScreenState extends State<ShortageScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-       
-         return false; 
-       },
+        return false;
+      },
       child: Scaffold(
-        backgroundColor: Color(0xFFE9E6E6),
+        backgroundColor: const Color(0xFFE9E6E6),
         appBar: AppBar(
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
               size: 30,
@@ -50,7 +45,7 @@ class _ShortageScreenState extends State<ShortageScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 "There are thousands of medicine needs!",
                 style: TextStyle(
                   fontSize: 18,
@@ -59,7 +54,7 @@ class _ShortageScreenState extends State<ShortageScreen> {
                 ),
               ),
               const SizedBox(height: 10),
-              Text(
+              const Text(
                 "Please deliver all the medicines you would like to donate to the organizations and people you prefer.Click the button!",
                 textAlign: TextAlign.center,
                 maxLines: 6,
@@ -74,16 +69,9 @@ class _ShortageScreenState extends State<ShortageScreen> {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: _launchURL,
-                  child: Text(
-                    "Go to medicine needs!",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                    ),
-                  ),
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
-                      Color(0xff8C52FF),
+                      const Color(0xff8C52FF),
                     ),
                     shape: MaterialStateProperty.all(
                       RoundedRectangleBorder(
@@ -92,6 +80,13 @@ class _ShortageScreenState extends State<ShortageScreen> {
                           color: Color(0xff8C52FF),
                         ),
                       ),
+                    ),
+                  ),
+                  child: const Text(
+                    "Go to medicine needs!",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
                     ),
                   ),
                 ),

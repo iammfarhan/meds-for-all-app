@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -135,12 +133,12 @@ class _AddMedicineRequestScreenState extends State<AddMedicineRequestScreen> {
                               decoration: InputDecoration(
                                   enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: Colors.blue, width: 2)),
+                                          color: Colors.blue, width: 2),),
                                   contentPadding:
                                       EdgeInsets.fromLTRB(0, 15, 15, 3),
                                   border: UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: Colors.blue, width: 2)),
+                                          color: Colors.blue, width: 2),),
                                   hintText: 'Medicine Name',
                                   labelText: "Medicine  Name"),
                               inputFormatters: [
@@ -219,12 +217,12 @@ class _AddMedicineRequestScreenState extends State<AddMedicineRequestScreen> {
                               decoration: InputDecoration(
                                   enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: Colors.blue, width: 2)),
+                                          color: Colors.blue, width: 2),),
                                   contentPadding:
                                       EdgeInsets.fromLTRB(0, 15, 15, 3),
                                   border: UnderlineInputBorder(
                                       borderSide: BorderSide(
-                                          color: Colors.blue, width: 2)),
+                                          color: Colors.blue, width: 2),),
                                   hintText: 'Contact Number',
                                   labelText: "Contact Number"),
                               inputFormatters: [

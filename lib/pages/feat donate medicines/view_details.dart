@@ -1,12 +1,5 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:url_launcher/url_launcher.dart';
 
 class ViewProfileDetails extends StatefulWidget {
@@ -24,14 +17,14 @@ class _ViewProfileDetailsState extends State<ViewProfileDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xFFFFFFFF),
-        body: SingleChildScrollView(
-          child: SafeArea(
-              child: Column(mainAxisSize: MainAxisSize.max, children: [
+      backgroundColor: const Color(0xFFFFFFFF),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(mainAxisSize: MainAxisSize.max, children: [
             Container(
-                margin: EdgeInsets.only(left: 4, right: 4),
+                margin: const EdgeInsets.only(left: 4, right: 4),
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(40),
                         bottomRight: Radius.circular(40)),
@@ -58,7 +51,7 @@ class _ViewProfileDetailsState extends State<ViewProfileDetails> {
                             onPressed: () {
                               Navigator.pop(context);
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.arrow_back_rounded,
                             ))
                       ],
@@ -66,132 +59,139 @@ class _ViewProfileDetailsState extends State<ViewProfileDetails> {
                   ],
                 )),
             Container(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(widget.documentSnapshot['med_name'],
-                        style: TextStyle(
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xff8C52FF),
-                        )),
-                    SizedBox(
-                      height: 12,
-                    ),
-                    Text(
-                      "Medicine Quantity:",
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(widget.documentSnapshot['med_name'],
                       style: const TextStyle(
-                        fontSize: 20,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold,
-                      ),
+                        color: Color(0xff8C52FF),
+                      )),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  const Text(
+                    "Medicine Quantity:",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
                     ),
-                    SizedBox(height: 8),
-                    Text(widget.documentSnapshot['quant'].toString(),
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Color(0xff8C52FF),
-                        )),
-                    SizedBox(
-                      height: 12,
-                    ),
-                    Text("Medicine Description",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w600)),
-                    SizedBox(height: 8),
-                    Container(
-                      child: Text(
-                          widget.documentSnapshot['description'].toString(),
-                          style: TextStyle(fontSize: 16)),
-                    ),
-                    SizedBox(
-                      height: 12,
-                    ),
-                    Text("Donater Name",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w600)),
-                    SizedBox(height: 8),
-                    Text(widget.documentSnapshot['name'].toString(),
-                        style: TextStyle(fontSize: 16)),
-                    SizedBox(
-                      height: 12,
-                    ),
-                    Text("Donater Contact",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w500)),
-                    SizedBox(height: 8),
-                    Text(widget.documentSnapshot['phone'].toString(),
-                        style: TextStyle(fontSize: 16)),
-                    SizedBox(
-                      height: 12,
-                    ),
-                    Text("Pick Up Address",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w500)),
-                    SizedBox(height: 8),
-                    Text(widget.documentSnapshot['address'].toString(),
-                        style: TextStyle(fontSize: 16)),
-                    SizedBox(
-                      height: 12,
-                    ),
-                    SizedBox(height: 12),
-                    Text("Medicine Pictures",
-                        style: TextStyle(
-                            fontSize: 24, fontWeight: FontWeight.w600)),
-                    SizedBox(height: 5),
-                    GridView.count(
-                      primary: false,
-                      shrinkWrap: true,
-                      crossAxisCount: 3,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
-                      children: List.generate(
-                        widget.documentSnapshot['details'].length,
-                        (index) => Container(
-                          width: 100,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(widget.documentSnapshot['quant'].toString(),
+                      style: const TextStyle(
+                        fontSize: 18,
+                        color: Color(0xff8C52FF),
+                      )),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  const Text("Medicine Description",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                  const SizedBox(height: 8),
+                  Container(
+                    child: Text(
+                        widget.documentSnapshot['description'].toString(),
+                        style: const TextStyle(fontSize: 16)),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  const Text("Donater Name",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w600)),
+                  const SizedBox(height: 8),
+                  Text(widget.documentSnapshot['name'].toString(),
+                      style: const TextStyle(fontSize: 16)),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  const Text("Donater Contact",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                  const SizedBox(height: 8),
+                  Text(widget.documentSnapshot['phone'].toString(),
+                      style: const TextStyle(fontSize: 16)),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  const Text("Pick Up Address",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w500)),
+                  const SizedBox(height: 8),
+                  Text(widget.documentSnapshot['address'].toString(),
+                      style: const TextStyle(fontSize: 16)),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  const SizedBox(height: 12),
+                  const Text("Medicine Pictures",
+                      style:
+                          TextStyle(fontSize: 24, fontWeight: FontWeight.w600)),
+                  const SizedBox(height: 5),
+                  GridView.count(
+                    primary: false,
+                    shrinkWrap: true,
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                    children: List.generate(
+                      widget.documentSnapshot['details'].length,
+                      (index) => Container(
+                        width: 100,
+                        height: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(Radius.circular(5)),
+                          color: Colors.grey.shade200,
+                        ),
+                        child: Image.network(
+                          widget.documentSnapshot['details'][index].toString(),
+                          width: double.maxFinite,
+                          fit: BoxFit.cover,
                           height: 100,
-                          child: Image.network(
-                            widget.documentSnapshot['details'][index]
-                                .toString(),
-                            width: double.maxFinite,
-                            fit: BoxFit.cover,
-                            height: 100,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(5)),
-                            color: Colors.grey.shade200,
-                          ),
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
-                    Container(
-                      width: double.maxFinite,
-                      height: 50,
-                      child: ElevatedButton(
-                          child: const Text(
-                            'Contact Me!',
-                            style: TextStyle(fontSize: 20),
+                  ),
+                  const SizedBox(height: 20),
+                  Container(
+                    width: double.maxFinite,
+                    height: 50,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                        padding: MaterialStateProperty.all<EdgeInsets>(
+                            const EdgeInsets.all(10)),
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(const Color(0xff8C52FF)),
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                            side: const BorderSide(
+                              color: Color(0xff8C52FF),
+                            ),
                           ),
-                          style: ButtonStyle(
-                              padding: MaterialStateProperty.all<EdgeInsets>(
-                                  EdgeInsets.all(10)),
-                              backgroundColor: MaterialStateProperty.all<Color>(
-                                  Color(0xff8C52FF)),
-                              shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                      side: BorderSide(
-                                          color: Color(0xff8C52FF))))),
-                          onPressed: () {
-                            final number =
-                                widget.documentSnapshot['phone'].toString();
-                            launch('tel://$number');
-                          }),
-                    )
-                  ],
-                ))
-          ])),
-        ));
+                        ),
+                      ),
+                      onPressed: () {
+                        final number =
+                            widget.documentSnapshot['phone'].toString();
+                        launch('tel://$number');
+                      },
+                      child: const Text(
+                        'Contact Me!',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ]),
+        ),
+      ),
+    );
   }
 }

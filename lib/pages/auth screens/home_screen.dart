@@ -1,11 +1,10 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:medicine_donation_app/widgets/option_card.dart';
-import '../widgets/carousal_widget.dart';
-import '../widgets/label.dart';
-import '../widgets/nav_bar.dart';
+
+import '../../widgets/carousal_widget.dart';
+import '../../widgets/label.dart';
+import '../../widgets/nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -34,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return false;
       },
       child: Scaffold(
-        backgroundColor: Color(0xFFE9E6E6),
+        backgroundColor: const Color(0xFFE9E6E6),
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: const Color(0xff8C52FF),
@@ -51,9 +50,9 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 30),
-                CarouselSliderWidget(),
-                SizedBox(height: 20),
+                const SizedBox(height: 30),
+                const CarouselSliderWidget(),
+                const SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Divider(
@@ -63,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 14),
                 LableWidget(title: 'Dashboard'),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 OptionCard(
                   optionTitle: "Your Record",
                   optionImage: 'assets/images/trophy.png',
@@ -72,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.pushReplacementNamed(context, '/userrecord');
                   },
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 OptionCard(
                   optionTitle: "Medicine Requests",
                   optionImage: 'assets/images/medrequest.png',
@@ -81,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.pushReplacementNamed(context, '/usermedsrequest');
                   },
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 OptionCard(
                   optionTitle: "Donation Camps ",
                   optionImage: 'assets/images/camp.png',
@@ -101,7 +100,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 14),
                 LableWidget(title: 'App Stats'),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 OptionCard(
                   optionTitle: "Med For All Stats",
                   optionImage: 'assets/images/stats.png',
@@ -120,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 const SizedBox(height: 14),
                 LableWidget(title: 'Options'),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 OptionCard(
                   optionTitle: "Get Medicine",
                   optionImage: 'assets/images/med3.png',
@@ -129,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Navigator.pushReplacementNamed(context, '/donation');
                   },
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 OptionCard(
                   optionTitle: "Medicine Request",
                   optionImage: 'assets/images/medrequest.png',
@@ -139,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         context, '/medicinerequestscreen');
                   },
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 OptionCard(
                   optionTitle: "Donation Camps",
                   optionImage: 'assets/images/camp.png',
@@ -149,7 +148,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         context, '/medicinedonationcampscreen');
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
               ],
             ),
           ),

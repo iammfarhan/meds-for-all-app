@@ -1,8 +1,5 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class CampStatus extends StatefulWidget {
   final DocumentSnapshot documentSnapshot;
@@ -26,62 +23,63 @@ class _CampStatusState extends State<CampStatus> {
         return false;
       },
       child: Scaffold(
-          backgroundColor: Color(0xFFFFFFFF),
-          appBar: AppBar(
-            centerTitle: true,
-            backgroundColor: const Color(0xff8C52FF),
-            title: const Text(
-              'Camp Status ',
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-            elevation: 4,
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-                size: 30,
-              ),
-              onPressed: () {
-                Navigator.pop(context);
-              },
+        backgroundColor: const Color(0xFFFFFFFF),
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: const Color(0xff8C52FF),
+          title: const Text(
+            'Camp Status ',
+            style: TextStyle(
+              color: Colors.white,
             ),
           ),
-          body: SingleChildScrollView(
-            child: SafeArea(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Center(
-                    child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                    SizedBox(height: 50),
-                    Text("Change Donation Camp",
-                        style:
-                            TextStyle(fontSize: 24, fontWeight: FontWeight.w600)),
-                    SizedBox(height: 15),
-                    Text(
+          elevation: 4,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+              size: 30,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 50),
+                    const Text("Change Donation Camp",
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.w600)),
+                    const SizedBox(height: 15),
+                    const Text(
                         'Press this button if the donation camp event is done, Its time to make it unavailable from inprogress donation camp event list',
                         maxLines: 5,
                         style: TextStyle(fontSize: 16)),
-                    SizedBox(height: 15),
+                    const SizedBox(height: 15),
                     widget.documentSnapshot['avail'] == true
                         ? Container(
                             width: double.maxFinite,
                             height: 50,
                             child: ElevatedButton(
                                 style: ButtonStyle(
-                                    padding: MaterialStateProperty.all<EdgeInsets>(
-                                        EdgeInsets.all(10)),
+                                    padding:
+                                        MaterialStateProperty.all<EdgeInsets>(
+                                            const EdgeInsets.all(10)),
                                     backgroundColor:
                                         MaterialStateProperty.all<Color>(
-                                            Color(0xff8C52FF)),
+                                            const Color(0xff8C52FF)),
                                     shape: MaterialStateProperty.all(
                                         RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(30.0),
-                                            side: BorderSide(
+                                            side: const BorderSide(
                                                 color: Color(0xff8C52FF))))),
                                 onPressed: () {
                                   FirebaseFirestore.instance
@@ -94,7 +92,7 @@ class _CampStatusState extends State<CampStatus> {
                                   style: TextStyle(fontSize: 20),
                                 )),
                           )
-                        : Center(
+                        : const Center(
                             child: Text(
                               'Thank you for updating camp status!',
                               textAlign: TextAlign.center,
@@ -105,11 +103,13 @@ class _CampStatusState extends State<CampStatus> {
                               ),
                             ),
                           ),
-              ],
+                  ],
+                ),
+              ),
             ),
-                  ),
-                )),
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

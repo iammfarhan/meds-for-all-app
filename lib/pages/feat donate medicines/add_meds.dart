@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors, sort_child_properties_last
-
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -51,7 +49,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
     }
   }
 
-  Future<void> SelectImageFromGallery() async {
+  Future<void> selectImageFromGallery() async {
     final pickedImage = await picker.getImage(source: ImageSource.gallery);
 
     if (pickedImage != null) {
@@ -74,14 +72,14 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
   Future OnSave() async {
     var service = services.text;
     var phon = phone.text;
-    var company_nam = company_name.text;
+    var companyNam = company_name.text;
     var descripton = description.text;
     var addres = address.text;
     var quant = int.parse(quanti.text);
     setState(
       () {
         Future.delayed(
-          Duration(seconds: 10),
+          const Duration(seconds: 10),
           () {
             Navigator.pushReplacementNamed(context, '/donation');
           },
@@ -95,7 +93,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
       ),
     );
 
-    final cover_image = await saveFileToFireBase(imageFile!);
+    final coverImage = await saveFileToFireBase(imageFile!);
 
     List<String> portfolio = [];
     if (workImageFile.length > 0) {
@@ -109,8 +107,8 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
         .add({
           'userid': FirebaseAuth.instance.currentUser!.uid,
           'address': addres,
-          'med_name': company_nam,
-          'cover_image': cover_image.toString(),
+          'med_name': companyNam,
+          'cover_image': coverImage.toString(),
           'details': portfolio.toList(),
           'description': descripton,
           'phone': phon,
@@ -140,7 +138,6 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
 
         return fileUrl;
       } on FirebaseException catch (e) {
-        // e.g, e.code == 'canceled'
         print("errorsss => $e");
       }
       return 'null';
@@ -154,7 +151,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
         return false;
       },
       child: Scaffold(
-        backgroundColor: Color(0xFFE9E6E6),
+        backgroundColor: const Color(0xFFE9E6E6),
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: const Color(0xff8C52FF),
@@ -166,7 +163,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
           ),
           elevation: 4,
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
               size: 30,
@@ -185,11 +182,11 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                   FocusScope.of(context).unfocus();
                 },
                 child: Padding(
-                  padding: EdgeInsetsDirectional.all(0),
+                  padding: const EdgeInsetsDirectional.all(0),
                   child: Column(
                     children: [
                       if (loading)
-                        LinearProgressIndicator(
+                        const LinearProgressIndicator(
                           semanticsLabel: 'Linear progress indicator',
                         ),
                       Stack(children: [
@@ -202,7 +199,7 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                               : Container(
                                   color: Colors.grey,
                                   height: 300,
-                                  child: Center(
+                                  child: const Center(
                                     child: Text(
                                       "Upload Image",
                                       style: TextStyle(
@@ -222,14 +219,14 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Container(
-                                padding: EdgeInsets.all(10),
+                                padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
                                     color: Colors.grey.shade300.withOpacity(.7),
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(50))),
+                                        const BorderRadius.all(Radius.circular(50))),
                                 child: IconButton(
-                                  onPressed: SelectImageFromGallery,
-                                  icon: Icon(
+                                  onPressed: selectImageFromGallery,
+                                  icon: const Icon(
                                     Icons.camera_alt,
                                     size: 34.0,
                                     color: Colors.blue,
@@ -241,14 +238,14 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                         ),
                       ]),
                       Container(
-                        padding: EdgeInsets.all(20),
+                        padding: const EdgeInsets.all(20),
                         child: Column(
                           children: [
                             TextFormField(
                               textCapitalization: TextCapitalization.sentences,
                               controller: company_name,
-                              style: TextStyle(fontSize: 14),
-                              decoration: InputDecoration(
+                              style: const TextStyle(fontSize: 14),
+                              decoration: const InputDecoration(
                                   enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Colors.blue, width: 2)),
@@ -275,8 +272,8 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                             TextFormField(
                               textCapitalization: TextCapitalization.sentences,
                               controller: services,
-                              style: TextStyle(fontSize: 14),
-                              decoration: InputDecoration(
+                              style: const TextStyle(fontSize: 14),
+                              decoration: const InputDecoration(
                                   enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Colors.blue, width: 2)),
@@ -303,8 +300,8 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                             TextFormField(
                               textCapitalization: TextCapitalization.sentences,
                               controller: phone,
-                              style: TextStyle(fontSize: 14),
-                              decoration: InputDecoration(
+                              style: const TextStyle(fontSize: 14),
+                              decoration: const InputDecoration(
                                   enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Colors.blue, width: 2)),
@@ -331,8 +328,8 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                             TextFormField(
                               textCapitalization: TextCapitalization.sentences,
                               controller: address,
-                              style: TextStyle(fontSize: 14),
-                              decoration: InputDecoration(
+                              style: const TextStyle(fontSize: 14),
+                              decoration: const InputDecoration(
                                 enabledBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
                                         color: Colors.blue, width: 2)),
@@ -355,8 +352,8 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                             TextFormField(
                               textCapitalization: TextCapitalization.sentences,
                               controller: quanti,
-                              style: TextStyle(fontSize: 14),
-                              decoration: InputDecoration(
+                              style: const TextStyle(fontSize: 14),
+                              decoration: const InputDecoration(
                                   enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Colors.blue, width: 2)),
@@ -383,9 +380,9 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                             TextFormField(
                               textCapitalization: TextCapitalization.sentences,
                               controller: description,
-                              style: TextStyle(fontSize: 14),
+                              style: const TextStyle(fontSize: 14),
                               maxLines: 2,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   enabledBorder: UnderlineInputBorder(
                                       borderSide: BorderSide(
                                           color: Colors.blue, width: 2)),
@@ -405,15 +402,15 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                               },
                             ),
                             Container(
-                              margin: EdgeInsets.only(top: 20),
+                              margin: const EdgeInsets.only(top: 20),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text("Upload Images of Medicine",
+                                  const Text("Upload Images of Medicine",
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20)),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 20,
                                   ),
                                   GridView.count(
@@ -429,23 +426,28 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                                           width: 100,
                                           height: 100,
                                           clipBehavior: Clip.hardEdge,
-                                          child: Image.file(
-                                            workImageFile[index],
-                                            width: double.maxFinite,
-                                            fit: BoxFit.cover,
-                                            height: 100,
-                                          ),
                                           decoration: BoxDecoration(
                                             borderRadius:
                                                 const BorderRadius.all(
                                                     Radius.circular(5)),
                                             color: Colors.grey.shade200,
                                           ),
+                                          child: Image.file(
+                                            workImageFile[index],
+                                            width: double.maxFinite,
+                                            fit: BoxFit.cover,
+                                            height: 100,
+                                          ),
                                         ),
                                       ),
                                       Container(
                                         width: 100,
                                         height: 100,
+                                        decoration: BoxDecoration(
+                                          borderRadius: const BorderRadius.all(
+                                              Radius.circular(5)),
+                                          color: Colors.grey.shade400,
+                                        ),
                                         child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
@@ -456,20 +458,15 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                                               message: "Add your photos",
                                               child: IconButton(
                                                   onPressed: SelectImageOfWork,
-                                                  icon: Icon(Icons.add,
+                                                  icon: const Icon(Icons.add,
                                                       size: 30)),
                                             )
                                           ],
                                         ),
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(5)),
-                                          color: Colors.grey.shade400,
-                                        ),
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: 20),
+                                  const SizedBox(height: 20),
                                   SizedBox(
                                     width: double.infinity,
                                     height: 50,
@@ -479,17 +476,10 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                                           OnSave();
                                         }
                                       },
-                                      child: Text(
-                                        "Save",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 16,
-                                        ),
-                                      ),
                                       style: ButtonStyle(
                                         backgroundColor:
                                             MaterialStateProperty.all<Color>(
-                                          Color(0xff8C52FF),
+                                          const Color(0xff8C52FF),
                                         ),
                                         shape: MaterialStateProperty.all(
                                           RoundedRectangleBorder(
@@ -501,9 +491,16 @@ class _AddMedicineScreenState extends State<AddMedicineScreen> {
                                           ),
                                         ),
                                       ),
+                                      child: const Text(
+                                        "Save",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                  SizedBox(height: 20),
+                                  const SizedBox(height: 20),
                                 ],
                               ),
                             ),

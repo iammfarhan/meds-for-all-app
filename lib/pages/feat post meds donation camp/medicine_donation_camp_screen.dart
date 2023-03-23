@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:medicine_donation_app/pages/feat%20post%20meds%20donation%20camp/donation_camps_history.dart';
@@ -9,18 +7,20 @@ class MedicineDonationCampScreen extends StatefulWidget {
   const MedicineDonationCampScreen({Key? key}) : super(key: key);
 
   @override
-  State<MedicineDonationCampScreen> createState() => _MedicineDonationCampScreenState();
+  State<MedicineDonationCampScreen> createState() =>
+      _MedicineDonationCampScreenState();
 }
 
-class _MedicineDonationCampScreenState extends State<MedicineDonationCampScreen> {
+class _MedicineDonationCampScreenState
+    extends State<MedicineDonationCampScreen> {
   int selectedTab = 0;
 
   Widget inProgressDonationCamp(BuildContext context) {
-    return InProgressDonationCamps();
+    return const InProgressDonationCamps();
   }
 
   Widget inProgressDonationCampHistory(BuildContext context) {
-    return DonationCampHistory();
+    return const DonationCampHistory();
   }
 
   late List<Widget> content;
@@ -72,9 +72,9 @@ class _MedicineDonationCampScreenState extends State<MedicineDonationCampScreen>
               padding: const EdgeInsets.only(bottom: 20),
               child: Center(
                 child: CupertinoSlidingSegmentedControl<int>(
-                  children: {
-                    0: const Text("In Progress"),
-                    1: const Text("Camps History"),
+                  children: const {
+                    0: Text("In Progress"),
+                    1: Text("Camps History"),
                   },
                   groupValue: selectedTab,
                   onValueChanged: (value) {

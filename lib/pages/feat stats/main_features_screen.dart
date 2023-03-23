@@ -1,9 +1,7 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:medicine_donation_app/widgets/option_card.dart';
-import '../widgets/nav_bar.dart';
+import '../../widgets/nav_bar.dart';
 
 class MainFeatureScreen extends StatefulWidget {
   const MainFeatureScreen({Key? key}) : super(key: key);
@@ -32,7 +30,7 @@ class _MainFeatureScreenState extends State<MainFeatureScreen> {
         return false;
       },
       child: Scaffold(
-        backgroundColor: Color(0xFFE9E6E6),
+        backgroundColor: const Color(0xFFE9E6E6),
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: const Color(0xff8C52FF),
@@ -49,7 +47,7 @@ class _MainFeatureScreenState extends State<MainFeatureScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 30),
+                const SizedBox(height: 30),
                 OptionCard(
                   optionTitle: "Donate",
                   optionImage: 'assets/images/med2.png',
@@ -58,7 +56,7 @@ class _MainFeatureScreenState extends State<MainFeatureScreen> {
                     Navigator.pushReplacementNamed(context, '/addService');
                   },
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 OptionCard(
                   optionTitle: "Medicine Request",
                   optionImage: 'assets/images/medrequest.png',
@@ -68,7 +66,7 @@ class _MainFeatureScreenState extends State<MainFeatureScreen> {
                         context, '/addmedicinerequestscreen');
                   },
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 OptionCard(
                   optionTitle: "Med Donation Camp",
                   optionImage: 'assets/images/camp.png',
@@ -78,7 +76,7 @@ class _MainFeatureScreenState extends State<MainFeatureScreen> {
                         context, '/adddonationcampscreen');
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
               ],
             ),
           ),

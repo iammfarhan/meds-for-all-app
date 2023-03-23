@@ -1,5 +1,3 @@
-// ignore_for_file: library_private_types_in_public_api, prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -18,9 +16,8 @@ class _ResetScreenState extends State<ResetScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
-       
-         return false; 
-       },
+        return false;
+      },
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         backgroundColor: const Color(0xFFF9F9F9),
@@ -39,8 +36,10 @@ class _ResetScreenState extends State<ResetScreen> {
                       height: 150),
                 ],
               ),
-              SizedBox(height: 30,),
-              const Text('Reset\nYour Password!',
+              SizedBox(
+                height: 30,
+              ),
+              const Text('Reset Password!',
                   textAlign: TextAlign.start,
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.w700)),
               const SizedBox(
@@ -86,14 +85,15 @@ class _ResetScreenState extends State<ResetScreen> {
                             margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
                             content: Text(
                               "No record found.",
-                              style: TextStyle(fontSize: 14, color: Colors.white),
+                              style:
+                                  TextStyle(fontSize: 14, color: Colors.white),
                               textAlign: TextAlign.center,
                             ),
                             duration: Duration(seconds: 5),
                           ),
                         );
                       }
-    
+
                       if (e.message == 'Given String is empty or null') {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
@@ -103,14 +103,16 @@ class _ResetScreenState extends State<ResetScreen> {
                             margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
                             content: Text(
                               "E-mail address is required.",
-                              style: TextStyle(fontSize: 14, color: Colors.white),
+                              style:
+                                  TextStyle(fontSize: 14, color: Colors.white),
                               textAlign: TextAlign.center,
                             ),
                             duration: Duration(seconds: 5),
                           ),
                         );
                       }
-                      if (e.message == 'The email address is badly formatted.') {
+                      if (e.message ==
+                          'The email address is badly formatted.') {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             backgroundColor: Colors.red,
@@ -119,27 +121,17 @@ class _ResetScreenState extends State<ResetScreen> {
                             margin: EdgeInsets.fromLTRB(20, 10, 20, 150),
                             content: Text(
                               "Invalid email format!",
-                              style: TextStyle(fontSize: 14, color: Colors.white),
+                              style:
+                                  TextStyle(fontSize: 14, color: Colors.white),
                               textAlign: TextAlign.center,
                             ),
                             duration: Duration(seconds: 5),
                           ),
                         );
                       }
-    
-                      print(e.code);
-                      print(e.message);
                       emailTextController.clear();
-    // show the snackbar here
                     }
                   },
-                  child: Text(
-                    "Reset Password",
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.white,
-                    ),
-                  ),
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
                       const Color(0xff8C52FF),
@@ -151,6 +143,13 @@ class _ResetScreenState extends State<ResetScreen> {
                           color: Color(0xff8C52FF),
                         ),
                       ),
+                    ),
+                  ),
+                  child: Text(
+                    "Reset Password",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
                     ),
                   ),
                 ),

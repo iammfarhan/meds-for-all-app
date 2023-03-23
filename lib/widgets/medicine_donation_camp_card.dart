@@ -143,12 +143,14 @@ class MedicineDonationCampCard extends StatelessWidget {
                       color: Color(0xff8C52FF),
                     ),
                     const SizedBox(width: 8),
-                    Text(
-                      address,
-                      maxLines: 3,
-                      style: const TextStyle(
-                        fontSize: 15,
-                        color: Colors.black,
+                    Expanded(
+                      child: Text(
+                        address,
+                        maxLines: 1,
+                        style: const TextStyle(
+                          fontSize: 15,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
                   ],
