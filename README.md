@@ -1,4 +1,4 @@
-# medicine_donation_app
+# Meds For All App
 
 A new Flutter project.
 
