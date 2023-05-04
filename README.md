@@ -4,7 +4,7 @@ A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+The Medicine Donation App is a platform that enables individuals to donate and obtain medicine, as well as disseminate information regarding nearby medicine donation camps, facilitating donations to NGOs and medical emergency centers. Additionally, if a specific medication is not available through the app, users may submit a request for the desired medication.
 ![1](https://user-images.githubusercontent.com/70325196/227926195-d6be2657-bf54-47c2-80a0-952d9e03d492.png)
 ![2](https://user-images.githubusercontent.com/70325196/227926214-6f139e75-e844-46bc-87d7-500c264e4191.png)
 ![3](https://user-images.githubusercontent.com/70325196/227926234-38591cc1-9f2c-44f0-9320-d016020e8aad.png)
